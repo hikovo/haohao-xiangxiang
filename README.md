@@ -15,3 +15,8 @@
 ## 使用范围
 
 原创源码沿用好好想想源码非营利使用许可 v1.0。第三方依赖遵循各自的许可证。角色插画、动画、字体、照片、视频、音频、信件、档案配字、模型权重和训练资料由各自权利人保留；本仓库只提供程序源码与空素材目录。
+
+## 使用帮助与隐私
+
+- [使用帮助](https://hikovo.github.io/haohao-xiangxiang/support.html)
+- [隐私政策](https://hikovo.github.io/haohao-xiangxiang/privacy.html)
