@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-unified-memory-state"
+description = "Enables the unified_memory_state command without any pre-configured scope."
+commands.allow = ["unified_memory_state"]
+
+[[permission]]
+identifier = "deny-unified-memory-state"
+description = "Denies the unified_memory_state command without any pre-configured scope."
+commands.deny = ["unified_memory_state"]

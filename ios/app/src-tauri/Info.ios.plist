@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>NSSupportsLiveActivities</key><true/>
+	<key>CFBundleDisplayName</key>
+	<string>好好想想</string>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
+	<key>UIBackgroundModes</key>
+	<array><string>audio</string></array>
+	<key>NSCameraUsageDescription</key>
+	<string>拍摄你选择放进便签或外观的照片、视频。</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>录制你选择放进便签的视频声音。</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>选择照片或视频，用于便签、头像、背景和日子记录。</string>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+		<key>UISceneConfigurations</key>
+		<dict>
+			<key>UIWindowSceneSessionRoleApplication</key>
+			<array>
+				<dict>
+					<key>UISceneConfigurationName</key>
+					<string>TaoScene</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
+</dict>
+</plist>

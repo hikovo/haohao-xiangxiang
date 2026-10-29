@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-unified-clear-conversation"
+description = "Enables the unified_clear_conversation command without any pre-configured scope."
+commands.allow = ["unified_clear_conversation"]
+
+[[permission]]
+identifier = "deny-unified-clear-conversation"
+description = "Denies the unified_clear_conversation command without any pre-configured scope."
+commands.deny = ["unified_clear_conversation"]

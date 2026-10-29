@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-mark-daily-prompt-shown"
+description = "Enables the mark_daily_prompt_shown command without any pre-configured scope."
+commands.allow = ["mark_daily_prompt_shown"]
+
+[[permission]]
+identifier = "deny-mark-daily-prompt-shown"
+description = "Denies the mark_daily_prompt_shown command without any pre-configured scope."
+commands.deny = ["mark_daily_prompt_shown"]

@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-health-store"
+description = "Enables the health_store command without any pre-configured scope."
+commands.allow = ["health_store"]
+
+[[permission]]
+identifier = "deny-health-store"
+description = "Denies the health_store command without any pre-configured scope."
+commands.deny = ["health_store"]

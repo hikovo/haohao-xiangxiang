@@ -1,0 +1,33 @@
+/* Shared by the app and the ledger iframe: one pink glass material for every X. */
+#mobile-app :is(button[aria-label="关闭"], [data-close-sheet], .cropper-heading button, .small-video-close),
+.sheet-head > .close {
+  box-sizing: border-box;
+  width: 42px;
+  height: 42px;
+  min-height: 42px;
+  flex: 0 0 42px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50% !important;
+  border: 1px solid rgb(238 194 208 / 55%) !important;
+  background: rgb(255 241 244 / 78%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.08) !important;
+  backdrop-filter: blur(18px) saturate(1.08) !important;
+  box-shadow: inset 0 1px 1px rgb(255 255 255 / 88%), inset 0 -1px 2px rgb(219 155 177 / 12%), 0 2px 7px rgb(117 78 91 / 6%) !important;
+  color: #795c65;
+  line-height: 1;
+}
+#mobile-app :is(button[aria-label="关闭"], [data-close-sheet], .cropper-heading button, .small-video-close, .memo-edit) svg,
+.sheet-head > .close svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+#mobile-app .small-video-close { width: 32px; height: 32px; min-height: 32px; }
+#mobile-app .memo-edit { width: 32px; height: 32px; min-height: 32px; }

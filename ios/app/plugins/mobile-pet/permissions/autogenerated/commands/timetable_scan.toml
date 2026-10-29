@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-timetable-scan"
+description = "Enables the timetable_scan command without any pre-configured scope."
+commands.allow = ["timetable_scan"]
+
+[[permission]]
+identifier = "deny-timetable-scan"
+description = "Denies the timetable_scan command without any pre-configured scope."
+commands.deny = ["timetable_scan"]

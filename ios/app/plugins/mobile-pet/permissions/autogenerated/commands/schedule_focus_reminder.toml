@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-schedule-focus-reminder"
+description = "Enables the schedule_focus_reminder command without any pre-configured scope."
+commands.allow = ["schedule_focus_reminder"]
+
+[[permission]]
+identifier = "deny-schedule-focus-reminder"
+description = "Denies the schedule_focus_reminder command without any pre-configured scope."
+commands.deny = ["schedule_focus_reminder"]

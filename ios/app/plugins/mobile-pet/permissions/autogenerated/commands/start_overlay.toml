@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-start-overlay"
+description = "Enables the start_overlay command without any pre-configured scope."
+commands.allow = ["start_overlay"]
+
+[[permission]]
+identifier = "deny-start-overlay"
+description = "Denies the start_overlay command without any pre-configured scope."
+commands.deny = ["start_overlay"]

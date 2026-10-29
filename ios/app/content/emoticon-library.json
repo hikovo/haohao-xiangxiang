@@ -1,0 +1,1409 @@
+{
+  "version": 1,
+  "updated": "2026-10-04",
+  "normalization": "仅用 NFC 和首尾空白建立去重键，展示原串保留；Markdown 转义符已按表情文字解码，内部空格、组合字符和装饰变体保留",
+  "notes": [
+    "仅使用开心、陪伴、专注、休息四个场景，全部保留项已归类",
+    "用户输入 115118 按新增-115 和新增-118 两项删除",
+    "原审核编号不补号、不重排；已接入 App 的随机文案池，小程序尚未同步",
+    "wink 和晕晕的互动提示不加颜文字"
+  ],
+  "existing": [
+    {
+      "id": "现有-002",
+      "face": "(^▽^)",
+      "scenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceReviewIds": [
+        "开心-02"
+      ]
+    },
+    {
+      "id": "现有-003",
+      "face": "(^ω^)",
+      "scenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceReviewIds": [
+        "开心-03"
+      ]
+    },
+    {
+      "id": "现有-005",
+      "face": "(´ω｀)",
+      "scenes": [
+        "休息"
+      ],
+      "status": "已接入 App",
+      "sourceReviewIds": [
+        "休息-02"
+      ]
+    },
+    {
+      "id": "现有-007",
+      "face": "(＾▽＾)",
+      "scenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceReviewIds": [
+        "开心-07"
+      ]
+    },
+    {
+      "id": "现有-008",
+      "face": "(＾ω＾)",
+      "scenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceReviewIds": [
+        "开心-08"
+      ]
+    },
+    {
+      "id": "现有-010",
+      "face": "(o^▽^o)",
+      "scenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceReviewIds": [
+        "开心-10"
+      ]
+    },
+    {
+      "id": "现有-011",
+      "face": "(o´▽｀o)",
+      "scenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceReviewIds": [
+        "开心-11"
+      ]
+    },
+    {
+      "id": "现有-015",
+      "face": "(*^▽^*)",
+      "scenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceReviewIds": [
+        "开心-15"
+      ]
+    },
+    {
+      "id": "现有-017",
+      "face": "(｡´ω｀｡)",
+      "scenes": [
+        "开心",
+        "休息"
+      ],
+      "status": "已接入 App",
+      "sourceReviewIds": [
+        "开心-17",
+        "休息-03"
+      ]
+    },
+    {
+      "id": "现有-019",
+      "face": "(｡´▽｀｡)",
+      "scenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceReviewIds": [
+        "开心-19"
+      ]
+    },
+    {
+      "id": "现有-020",
+      "face": "(｡^▽^｡)",
+      "scenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceReviewIds": [
+        "开心-20"
+      ]
+    },
+    {
+      "id": "现有-023",
+      "face": "(^o^)",
+      "scenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceReviewIds": [
+        "开心-23"
+      ]
+    },
+    {
+      "id": "现有-027",
+      "face": "(^-^)",
+      "scenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceReviewIds": [
+        "开心-27"
+      ]
+    },
+    {
+      "id": "现有-046",
+      "face": "(｡•ᴗ•｡)",
+      "scenes": [
+        "开心",
+        "陪伴"
+      ],
+      "status": "已接入 App",
+      "sourceReviewIds": [
+        "开心-46",
+        "陪伴-06"
+      ]
+    },
+    {
+      "id": "现有-047",
+      "face": "(˶ˊᵕˋ˵)",
+      "scenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceReviewIds": [
+        "开心-47"
+      ]
+    },
+    {
+      "id": "现有-049",
+      "face": "(✿´ ꒳ `)",
+      "scenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceReviewIds": [
+        "开心-49"
+      ]
+    },
+    {
+      "id": "现有-050",
+      "face": "(๑˃ᴗ˂)ﻭ",
+      "scenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceReviewIds": [
+        "开心-50"
+      ]
+    },
+    {
+      "id": "现有-053",
+      "face": "(ง •̀_•́)ง",
+      "scenes": [
+        "专注"
+      ],
+      "status": "已接入 App",
+      "sourceReviewIds": [
+        "专注-01"
+      ]
+    },
+    {
+      "id": "现有-055",
+      "face": "(๑•̀ㅂ•́)و",
+      "scenes": [
+        "专注"
+      ],
+      "status": "已接入 App",
+      "sourceReviewIds": [
+        "专注-03"
+      ]
+    },
+    {
+      "id": "现有-056",
+      "face": "(ง ˙ω˙)ว",
+      "scenes": [
+        "专注"
+      ],
+      "status": "已接入 App",
+      "sourceReviewIds": [
+        "专注-04"
+      ]
+    },
+    {
+      "id": "现有-057",
+      "face": "( •̀ᴗ•́ )و",
+      "scenes": [
+        "专注"
+      ],
+      "status": "已接入 App",
+      "sourceReviewIds": [
+        "专注-05"
+      ]
+    },
+    {
+      "id": "现有-058",
+      "face": "(˘ω˘)",
+      "scenes": [
+        "休息"
+      ],
+      "status": "已接入 App",
+      "sourceReviewIds": [
+        "休息-01"
+      ]
+    }
+  ],
+  "newCandidates": [
+    {
+      "id": "新增-001",
+      "face": "( ˶˘ ³˘)♡",
+      "scenes": [
+        "休息"
+      ],
+      "suggestedScenes": [
+        "休息"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        1
+      ],
+      "fontCheck": "待真机检查"
+    },
+    {
+      "id": "新增-002",
+      "face": "( ˶˘ ³˘)♥︎",
+      "scenes": [
+        "休息"
+      ],
+      "suggestedScenes": [
+        "休息"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        2
+      ],
+      "fontCheck": "含组合字形或少见字符，需真机检查"
+    },
+    {
+      "id": "新增-003",
+      "face": "٩(๑• ₃ -๑)۶",
+      "scenes": [
+        "开心"
+      ],
+      "suggestedScenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        3
+      ],
+      "fontCheck": "待真机检查"
+    },
+    {
+      "id": "新增-011",
+      "face": "꒰੭⸝⸝´˘ '⸝⸝꒱੭♡",
+      "scenes": [
+        "休息"
+      ],
+      "suggestedScenes": [
+        "休息"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        12
+      ],
+      "fontCheck": "待真机检查"
+    },
+    {
+      "id": "新增-012",
+      "face": "(*´∀`)♪",
+      "scenes": [
+        "开心"
+      ],
+      "suggestedScenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        13
+      ],
+      "fontCheck": "待真机检查"
+    },
+    {
+      "id": "新增-013",
+      "face": "(๑'ᵕ'๑)⸝*",
+      "scenes": [
+        "开心"
+      ],
+      "suggestedScenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        14
+      ],
+      "fontCheck": "待真机检查"
+    },
+    {
+      "id": "新增-018",
+      "face": "ˈ ᵕ ˈ ♡",
+      "scenes": [
+        "陪伴"
+      ],
+      "suggestedScenes": [
+        "陪伴"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        19
+      ],
+      "fontCheck": "待真机检查"
+    },
+    {
+      "id": "新增-019",
+      "face": "( •̀ᄇ• ́)ﻭ✧",
+      "scenes": [
+        "专注"
+      ],
+      "suggestedScenes": [
+        "专注"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        20
+      ],
+      "fontCheck": "含组合字形或少见字符，需真机检查"
+    },
+    {
+      "id": "新增-021",
+      "face": "՞•ᴥ•՞",
+      "scenes": [
+        "陪伴"
+      ],
+      "suggestedScenes": [
+        "陪伴"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        22
+      ],
+      "fontCheck": "待真机检查"
+    },
+    {
+      "id": "新增-024",
+      "face": "՞-ㅅ-՞",
+      "scenes": [
+        "休息"
+      ],
+      "suggestedScenes": [
+        "休息"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        25
+      ],
+      "fontCheck": "待真机检查"
+    },
+    {
+      "id": "新增-028",
+      "face": "•̀ ᴗ -",
+      "scenes": [
+        "开心"
+      ],
+      "suggestedScenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        29
+      ],
+      "fontCheck": "含组合字形或少见字符，需真机检查"
+    },
+    {
+      "id": "新增-029",
+      "face": "˶• ༝ •˶",
+      "scenes": [
+        "陪伴"
+      ],
+      "suggestedScenes": [
+        "陪伴"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        30
+      ],
+      "fontCheck": "待真机检查"
+    },
+    {
+      "id": "新增-030",
+      "face": "• ˔ ก",
+      "scenes": [
+        "休息"
+      ],
+      "suggestedScenes": [
+        "休息"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        31
+      ],
+      "fontCheck": "待真机检查"
+    },
+    {
+      "id": "新增-034",
+      "face": "ᴖ ᴈ ᴖ",
+      "scenes": [
+        "开心"
+      ],
+      "suggestedScenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        35
+      ],
+      "fontCheck": "待真机检查"
+    },
+    {
+      "id": "新增-046",
+      "face": "＞ᨓ＜",
+      "scenes": [
+        "开心"
+      ],
+      "suggestedScenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        47
+      ],
+      "fontCheck": "待真机检查"
+    },
+    {
+      "id": "新增-064",
+      "face": "(˶˃ ᵕ ˂˶)",
+      "scenes": [
+        "开心"
+      ],
+      "suggestedScenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        65
+      ],
+      "fontCheck": "待真机检查"
+    },
+    {
+      "id": "新增-065",
+      "face": "૮(≖⩊≖)ა",
+      "scenes": [
+        "专注"
+      ],
+      "suggestedScenes": [
+        "专注"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        66
+      ],
+      "fontCheck": "待真机检查"
+    },
+    {
+      "id": "新增-066",
+      "face": "૮ ․ ․ ྀིა",
+      "scenes": [
+        "陪伴"
+      ],
+      "suggestedScenes": [
+        "陪伴"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        67
+      ],
+      "fontCheck": "含组合字形或少见字符，需真机检查"
+    },
+    {
+      "id": "新增-071",
+      "face": "૮₍ ˃ ⤙ ˂ ₎ა",
+      "scenes": [
+        "开心"
+      ],
+      "suggestedScenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        73
+      ],
+      "fontCheck": "待真机检查"
+    },
+    {
+      "id": "新增-072",
+      "face": "ദ്ദി •⩊• )",
+      "scenes": [
+        "专注"
+      ],
+      "suggestedScenes": [
+        "专注"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        74
+      ],
+      "fontCheck": "含组合字形或少见字符，需真机检查"
+    },
+    {
+      "id": "新增-074",
+      "face": "⦁֊⦁",
+      "scenes": [
+        "陪伴"
+      ],
+      "suggestedScenes": [
+        "陪伴"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        76
+      ],
+      "fontCheck": "待真机检查"
+    },
+    {
+      "id": "新增-079",
+      "face": "⁽¯꒳¯⁾",
+      "scenes": [
+        "休息"
+      ],
+      "suggestedScenes": [
+        "休息"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        81
+      ],
+      "fontCheck": "待真机检查"
+    },
+    {
+      "id": "新增-081",
+      "face": "˶⁃ ω ⁃˶",
+      "scenes": [
+        "休息"
+      ],
+      "suggestedScenes": [
+        "休息"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        83
+      ],
+      "fontCheck": "待真机检查"
+    },
+    {
+      "id": "新增-083",
+      "face": "⌯'ㅅ'⌯",
+      "scenes": [
+        "陪伴"
+      ],
+      "suggestedScenes": [
+        "陪伴"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        85
+      ],
+      "fontCheck": "待真机检查"
+    },
+    {
+      "id": "新增-086",
+      "face": "⌯'ᵕ'⌯",
+      "scenes": [
+        "开心"
+      ],
+      "suggestedScenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        88
+      ],
+      "fontCheck": "待真机检查"
+    },
+    {
+      "id": "新增-088",
+      "face": "⑉･ᴗ･⑉",
+      "scenes": [
+        "开心"
+      ],
+      "suggestedScenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        90
+      ],
+      "fontCheck": "待真机检查"
+    },
+    {
+      "id": "新增-097",
+      "face": "ʚ˶˃ ᵕ ˂˶ɞ",
+      "scenes": [
+        "开心"
+      ],
+      "suggestedScenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        99
+      ],
+      "fontCheck": "待真机检查"
+    },
+    {
+      "id": "新增-102",
+      "face": "⌯^𖥦^⌯ಣ",
+      "scenes": [
+        "开心"
+      ],
+      "suggestedScenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        105
+      ],
+      "fontCheck": "含组合字形或少见字符，需真机检查"
+    },
+    {
+      "id": "新增-117",
+      "face": "(- ₃ -)",
+      "scenes": [
+        "专注"
+      ],
+      "suggestedScenes": [
+        "专注"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        121
+      ],
+      "fontCheck": "待真机检查"
+    },
+    {
+      "id": "新增-122",
+      "face": "° ꒳ °",
+      "scenes": [
+        "陪伴"
+      ],
+      "suggestedScenes": [
+        "陪伴"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        126
+      ],
+      "fontCheck": "待真机检查"
+    },
+    {
+      "id": "新增-124",
+      "face": "╹⁠꒫╹⁠",
+      "scenes": [
+        "专注"
+      ],
+      "suggestedScenes": [
+        "专注"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        128
+      ],
+      "fontCheck": "待真机检查"
+    },
+    {
+      "id": "新增-148",
+      "face": "·◑ᴗ◐.",
+      "scenes": [
+        "开心"
+      ],
+      "suggestedScenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        154
+      ],
+      "fontCheck": "待真机检查"
+    },
+    {
+      "id": "新增-150",
+      "face": "·•̀_•́.",
+      "scenes": [
+        "专注"
+      ],
+      "suggestedScenes": [
+        "专注"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        156
+      ],
+      "fontCheck": "含组合字形或少见字符，需真机检查"
+    },
+    {
+      "id": "新增-151",
+      "face": "·•̀ᴗ•́.",
+      "scenes": [
+        "开心"
+      ],
+      "suggestedScenes": [
+        "开心"
+      ],
+      "status": "已接入 App",
+      "sourceNumbers": [
+        157
+      ],
+      "fontCheck": "含组合字形或少见字符，需真机检查"
+    }
+  ],
+  "counts": {
+    "existing": 22,
+    "received": 161,
+    "originalNewUnique": 155,
+    "originalDuplicates": 6,
+    "newUnique": 34,
+    "removedNew": 121,
+    "total": 56,
+    "existingSceneEntries": 24,
+    "removedExisting": 37
+  },
+  "selection": {
+    "date": "2026-10-04",
+    "retainedIds": [
+      "新增-001",
+      "新增-002",
+      "新增-003",
+      "新增-011",
+      "新增-012",
+      "新增-013",
+      "新增-018",
+      "新增-019",
+      "新增-021",
+      "新增-024",
+      "新增-028",
+      "新增-029",
+      "新增-030",
+      "新增-034",
+      "新增-046",
+      "新增-064",
+      "新增-065",
+      "新增-066",
+      "新增-071",
+      "新增-072",
+      "新增-074",
+      "新增-079",
+      "新增-081",
+      "新增-083",
+      "新增-086",
+      "新增-088",
+      "新增-097",
+      "新增-102",
+      "新增-117",
+      "新增-122",
+      "新增-124",
+      "新增-148",
+      "新增-150",
+      "新增-151"
+    ],
+    "removedIds": [
+      "新增-004",
+      "新增-005",
+      "新增-006",
+      "新增-007",
+      "新增-008",
+      "新增-009",
+      "新增-010",
+      "新增-014",
+      "新增-015",
+      "新增-016",
+      "新增-017",
+      "新增-020",
+      "新增-022",
+      "新增-023",
+      "新增-025",
+      "新增-026",
+      "新增-027",
+      "新增-031",
+      "新增-032",
+      "新增-033",
+      "新增-035",
+      "新增-036",
+      "新增-037",
+      "新增-038",
+      "新增-039",
+      "新增-040",
+      "新增-041",
+      "新增-042",
+      "新增-043",
+      "新增-044",
+      "新增-045",
+      "新增-047",
+      "新增-048",
+      "新增-049",
+      "新增-050",
+      "新增-051",
+      "新增-052",
+      "新增-053",
+      "新增-054",
+      "新增-055",
+      "新增-056",
+      "新增-057",
+      "新增-058",
+      "新增-059",
+      "新增-060",
+      "新增-061",
+      "新增-062",
+      "新增-063",
+      "新增-067",
+      "新增-068",
+      "新增-069",
+      "新增-070",
+      "新增-073",
+      "新增-075",
+      "新增-076",
+      "新增-077",
+      "新增-078",
+      "新增-080",
+      "新增-082",
+      "新增-084",
+      "新增-085",
+      "新增-087",
+      "新增-089",
+      "新增-090",
+      "新增-091",
+      "新增-092",
+      "新增-093",
+      "新增-094",
+      "新增-095",
+      "新增-096",
+      "新增-098",
+      "新增-099",
+      "新增-100",
+      "新增-101",
+      "新增-103",
+      "新增-104",
+      "新增-105",
+      "新增-106",
+      "新增-107",
+      "新增-108",
+      "新增-109",
+      "新增-110",
+      "新增-111",
+      "新增-112",
+      "新增-113",
+      "新增-114",
+      "新增-115",
+      "新增-116",
+      "新增-118",
+      "新增-119",
+      "新增-120",
+      "新增-121",
+      "新增-123",
+      "新增-125",
+      "新增-126",
+      "新增-127",
+      "新增-128",
+      "新增-129",
+      "新增-130",
+      "新增-131",
+      "新增-132",
+      "新增-133",
+      "新增-134",
+      "新增-135",
+      "新增-136",
+      "新增-137",
+      "新增-138",
+      "新增-139",
+      "新增-140",
+      "新增-141",
+      "新增-142",
+      "新增-143",
+      "新增-144",
+      "新增-145",
+      "新增-146",
+      "新增-147",
+      "新增-149",
+      "新增-152",
+      "新增-153",
+      "新增-154",
+      "新增-155"
+    ],
+    "note": "已按用户定稿接入 App，删除项不会再从随机池出现；原编号不变；小程序尚未同步",
+    "existingRetainedReviewIds": [
+      "开心-02",
+      "开心-03",
+      "开心-07",
+      "开心-08",
+      "开心-10",
+      "开心-11",
+      "开心-15",
+      "开心-17",
+      "开心-19",
+      "开心-20",
+      "开心-23",
+      "开心-27",
+      "开心-46",
+      "开心-47",
+      "开心-49",
+      "开心-50",
+      "陪伴-06",
+      "专注-01",
+      "专注-03",
+      "专注-04",
+      "专注-05",
+      "休息-01",
+      "休息-02",
+      "休息-03"
+    ],
+    "existingRemovedIds": [
+      "现有-001",
+      "现有-004",
+      "现有-006",
+      "现有-009",
+      "现有-012",
+      "现有-013",
+      "现有-014",
+      "现有-016",
+      "现有-018",
+      "现有-021",
+      "现有-022",
+      "现有-024",
+      "现有-025",
+      "现有-026",
+      "现有-028",
+      "现有-029",
+      "现有-030",
+      "现有-031",
+      "现有-032",
+      "现有-033",
+      "现有-034",
+      "现有-035",
+      "现有-036",
+      "现有-037",
+      "现有-038",
+      "现有-039",
+      "现有-040",
+      "现有-041",
+      "现有-042",
+      "现有-043",
+      "现有-044",
+      "现有-045",
+      "现有-048",
+      "现有-051",
+      "现有-052",
+      "现有-054",
+      "现有-059"
+    ],
+    "finalSceneAssignments": {
+      "开心": [
+        3,
+        71
+      ],
+      "陪伴": [
+        74,
+        122
+      ],
+      "专注": [
+        65,
+        117,
+        124
+      ],
+      "休息": [
+        1,
+        2,
+        11
+      ]
+    },
+    "latestDeletedIds": [
+      "新增-104",
+      "新增-106",
+      "新增-109",
+      "新增-111",
+      "新增-114",
+      "新增-115",
+      "新增-118",
+      "新增-152",
+      "新增-153"
+    ]
+  },
+  "duplicateHistory": [
+    {
+      "sourceNumber": 7,
+      "keptId": "新增-005",
+      "face": "૮꒰˶ ˘ ³˘꒱ˆᵕ ˆ˶₎ა",
+      "selectionStatus": "用户已排除"
+    },
+    {
+      "sourceNumber": 69,
+      "keptId": "新增-044",
+      "face": "ˆ𐃷ˆ",
+      "selectionStatus": "用户已排除"
+    },
+    {
+      "sourceNumber": 104,
+      "keptId": "新增-026",
+      "face": "⌯>ᴗo⌯ಣ",
+      "selectionStatus": "用户已排除"
+    },
+    {
+      "sourceNumber": 120,
+      "keptId": "新增-047",
+      "face": "ᯣ_ᯣ",
+      "selectionStatus": "用户已排除"
+    },
+    {
+      "sourceNumber": 147,
+      "keptId": "新增-039",
+      "face": "•᷄ࡇ•᷅",
+      "selectionStatus": "用户已排除"
+    },
+    {
+      "sourceNumber": 153,
+      "keptId": "新增-039",
+      "face": "•᷄ࡇ•᷅",
+      "selectionStatus": "用户已排除"
+    }
+  ],
+  "reviewScenes": [
+    {
+      "scene": "开心",
+      "usage": "普通互动、完成小事后的夸夸，以及适合开心语气的页面小话。",
+      "entries": [
+        {
+          "sourceId": "开心-02",
+          "face": "(^▽^)",
+          "origin": "原有"
+        },
+        {
+          "sourceId": "开心-03",
+          "face": "(^ω^)",
+          "origin": "原有"
+        },
+        {
+          "sourceId": "开心-07",
+          "face": "(＾▽＾)",
+          "origin": "原有"
+        },
+        {
+          "sourceId": "开心-08",
+          "face": "(＾ω＾)",
+          "origin": "原有"
+        },
+        {
+          "sourceId": "开心-10",
+          "face": "(o^▽^o)",
+          "origin": "原有"
+        },
+        {
+          "sourceId": "开心-11",
+          "face": "(o´▽｀o)",
+          "origin": "原有"
+        },
+        {
+          "sourceId": "开心-15",
+          "face": "(*^▽^*)",
+          "origin": "原有"
+        },
+        {
+          "sourceId": "开心-17",
+          "face": "(｡´ω｀｡)",
+          "origin": "原有"
+        },
+        {
+          "sourceId": "开心-19",
+          "face": "(｡´▽｀｡)",
+          "origin": "原有"
+        },
+        {
+          "sourceId": "开心-20",
+          "face": "(｡^▽^｡)",
+          "origin": "原有"
+        },
+        {
+          "sourceId": "开心-23",
+          "face": "(^o^)",
+          "origin": "原有"
+        },
+        {
+          "sourceId": "开心-27",
+          "face": "(^-^)",
+          "origin": "原有"
+        },
+        {
+          "sourceId": "开心-46",
+          "face": "(｡•ᴗ•｡)",
+          "origin": "原有"
+        },
+        {
+          "sourceId": "开心-47",
+          "face": "(˶ˊᵕˋ˵)",
+          "origin": "原有"
+        },
+        {
+          "sourceId": "开心-49",
+          "face": "(✿´ ꒳ `)",
+          "origin": "原有"
+        },
+        {
+          "sourceId": "开心-50",
+          "face": "(๑˃ᴗ˂)ﻭ",
+          "origin": "原有"
+        },
+        {
+          "sourceId": "新增-003",
+          "face": "٩(๑• ₃ -๑)۶",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-012",
+          "face": "(*´∀`)♪",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-013",
+          "face": "(๑'ᵕ'๑)⸝*",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-028",
+          "face": "•̀ ᴗ -",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-034",
+          "face": "ᴖ ᴈ ᴖ",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-046",
+          "face": "＞ᨓ＜",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-064",
+          "face": "(˶˃ ᵕ ˂˶)",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-071",
+          "face": "૮₍ ˃ ⤙ ˂ ₎ა",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-086",
+          "face": "⌯'ᵕ'⌯",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-088",
+          "face": "⑉･ᴗ･⑉",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-097",
+          "face": "ʚ˶˃ ᵕ ˂˶ɞ",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-102",
+          "face": "⌯^𖥦^⌯ಣ",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-148",
+          "face": "·◑ᴗ◐.",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-151",
+          "face": "·•̀ᴗ•́.",
+          "origin": "新增"
+        }
+      ]
+    },
+    {
+      "scene": "陪伴",
+      "usage": "轻声问候、普通提醒、页面底部的陪伴小话。",
+      "entries": [
+        {
+          "sourceId": "陪伴-06",
+          "face": "(｡•ᴗ•｡)",
+          "origin": "原有"
+        },
+        {
+          "sourceId": "新增-018",
+          "face": "ˈ ᵕ ˈ ♡",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-021",
+          "face": "՞•ᴥ•՞",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-029",
+          "face": "˶• ༝ •˶",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-066",
+          "face": "૮ ․ ․ ྀིა",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-074",
+          "face": "⦁֊⦁",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-083",
+          "face": "⌯'ㅅ'⌯",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-122",
+          "face": "° ꒳ °",
+          "origin": "新增"
+        }
+      ]
+    },
+    {
+      "scene": "专注",
+      "usage": "工作模式、专注计时，以及认真做事时的打气。",
+      "entries": [
+        {
+          "sourceId": "专注-01",
+          "face": "(ง •̀_•́)ง",
+          "origin": "原有"
+        },
+        {
+          "sourceId": "专注-03",
+          "face": "(๑•̀ㅂ•́)و",
+          "origin": "原有"
+        },
+        {
+          "sourceId": "专注-04",
+          "face": "(ง ˙ω˙)ว",
+          "origin": "原有"
+        },
+        {
+          "sourceId": "专注-05",
+          "face": "( •̀ᴗ•́ )و",
+          "origin": "原有"
+        },
+        {
+          "sourceId": "新增-019",
+          "face": "( •̀ᄇ• ́)ﻭ✧",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-065",
+          "face": "૮(≖⩊≖)ა",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-072",
+          "face": "ദ്ദി •⩊• )",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-117",
+          "face": "(- ₃ -)",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-124",
+          "face": "╹⁠꒫╹⁠",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-150",
+          "face": "·•̀_•́.",
+          "origin": "新增"
+        }
+      ]
+    },
+    {
+      "scene": "休息",
+      "usage": "切回休闲模式、结束专注和放松时。",
+      "entries": [
+        {
+          "sourceId": "休息-01",
+          "face": "(˘ω˘)",
+          "origin": "原有"
+        },
+        {
+          "sourceId": "休息-02",
+          "face": "(´ω｀)",
+          "origin": "原有"
+        },
+        {
+          "sourceId": "休息-03",
+          "face": "(｡´ω｀｡)",
+          "origin": "原有"
+        },
+        {
+          "sourceId": "新增-001",
+          "face": "( ˶˘ ³˘)♡",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-002",
+          "face": "( ˶˘ ³˘)♥︎",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-011",
+          "face": "꒰੭⸝⸝´˘ '⸝⸝꒱੭♡",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-024",
+          "face": "՞-ㅅ-՞",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-030",
+          "face": "• ˔ ก",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-079",
+          "face": "⁽¯꒳¯⁾",
+          "origin": "新增"
+        },
+        {
+          "sourceId": "新增-081",
+          "face": "˶⁃ ω ⁃˶",
+          "origin": "新增"
+        }
+      ]
+    }
+  ],
+  "unassigned": [],
+  "appIntegration": {
+    "source": "src/friendly-copy.ts",
+    "sceneSizes": {
+      "happy": 30,
+      "calm": 8,
+      "focus": 10,
+      "rest": 10
+    },
+    "uniqueFaces": 56,
+    "miniProgramUpdated": false,
+    "apkUpdated": true,
+    "apkRelease": "release/v2.0.0-20261004-final/好好想想-v2.0.0.apk"
+  }
+}

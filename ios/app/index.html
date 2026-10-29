@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="transparent" />
+    <meta name="color-scheme" content="light" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <link rel="stylesheet" href="/src/soft-ui.css" />
+    <link rel="stylesheet" href="/src/miniprogram-colors.css" />
+    <link rel="stylesheet" href="/src/glass-ui.css" />
+    <link rel="stylesheet" href="/src/ios-companions.css" />
+    <link rel="stylesheet" href="/src/review-ui.css" />
+    <link rel="stylesheet" href="/src/radii-ui.css" />
+    <link rel="stylesheet" href="/glass-close.css?v=20261013-book-pink-final" />
+    <link rel="stylesheet" href="/header-ui.css?v=20261013-book-pink-final" />
+    <link rel="stylesheet" href="/src/final-ui.css" />
+    <title>好好想想</title>
+    <script>
+      (function () {
+        var ready = false;
+        var timer;
+        function fail() {
+          if (ready) return;
+          var message = document.getElementById('app-launch-message');
+          var retry = document.getElementById('app-launch-retry');
+          if (!message || !retry) {
+            document.addEventListener('DOMContentLoaded', fail, { once: true });
+            return;
+          }
+          window.clearTimeout(timer);
+          if (message) message.hidden = false;
+          if (retry) {
+            retry.hidden = false;
+            retry.onclick = function () { window.location.reload(); };
+          }
+        }
+        window.__SANHAO_STARTUP__ = {
+          ready: function () {
+            ready = true;
+            window.clearTimeout(timer);
+            var screen = document.getElementById('app-launch-screen');
+            if (screen && screen.parentNode) screen.parentNode.removeChild(screen);
+          },
+          fail: fail
+        };
+        window.addEventListener('error', function (event) {
+          if (event.error || (event.target && event.target.tagName === 'SCRIPT')) fail();
+        }, true);
+        window.addEventListener('unhandledrejection', fail);
+        timer = window.setTimeout(fail, 20000);
+      }());
+    </script>
+    <script type="module" src="/src/main.ts" defer></script>
+  </head>
+  <body>
+    <div id="app-launch-screen" role="status" aria-label="兔兔正在准备小家">
+      <img src="/rabbit-head.png" alt="三好兔" />
+      <p id="app-launch-message" hidden>兔兔没能准备好小家，请重新打开试试看。<br />如果仍然进不去，可以把手机型号和这个画面发给我们。</p>
+      <button id="app-launch-retry" type="button" hidden>重新打开</button>
+    </div>
+    <main id="stage" class="desktop-surface" aria-label="三好兔桌宠">
+      <button id="pet" type="button" aria-label="三好兔"></button>
+      <section id="pet-menu" class="pet-menu" hidden aria-label="三好兔菜单">
+        <button id="work-toggle" type="button">一起工作</button>
+        <label class="size-control" for="size-slider">
+          <span class="size-heading">
+            <span>尺寸</span>
+            <output id="size-value" for="size-slider">55%</output>
+          </span>
+          <input id="size-slider" type="range" min="40" max="100" step="5" value="55" />
+          <span class="size-scale" aria-hidden="true">
+            <span>40</span><span>55</span><span>70</span><span>85</span><span>100</span>
+          </span>
+        </label>
+        <button id="reset-position" type="button">回到屏幕中央</button>
+        <button id="quit" type="button">退出三好兔</button>
+        <button id="confirm-menu" class="confirm-button" type="button">确认并关闭</button>
+      </section>
+    </main>
+
+    <main id="mobile-app" class="mobile-surface" aria-label="三好兔手机陪伴">
+      <section id="page-home" class="app-page active" data-page="home" aria-label="首页">
+        <header class="page-header home-page-header">
+          <div class="page-brand">
+            <span class="page-brand-logo" aria-hidden="true"><img src="/rabbit-head.png" alt="" draggable="false" /></span>
+            <h1 id="home-pet-name" class="mobile-kicker"><img class="page-brand-title title-home" src="/title-home.png" alt="三好兔" /></h1>
+            <span id="mobile-mode-label" hidden>休闲中</span>
+          </div>
+          <div class="header-actions">
+            <button id="timer-pill" class="timer-pill" type="button" hidden>
+              <span aria-hidden="true">♡</span><span id="timer-text">25:00</span>
+            </button>
+            <button id="open-notifications" class="icon-button" type="button" aria-label="消息">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg>
+              <i id="notification-dot" hidden></i>
+            </button>
+            <button id="open-menu" class="icon-button" type="button" aria-label="更多">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>
+            </button>
+          </div>
+        </header>
+
+        <section id="mobile-room" class="mobile-room" aria-label="三好兔的小房间">
+        <button class="floor-light upper-light" type="button" aria-label="开关二层灯" aria-pressed="false"></button>
+        <button class="floor-light lower-light" type="button" aria-label="开关一层灯" aria-pressed="false"></button>
+        <span class="room-cloud cloud-one" aria-hidden="true"></span>
+        <span class="room-cloud cloud-two" aria-hidden="true"></span>
+        <span class="room-star star-one" aria-hidden="true">✦</span>
+        <span class="room-star star-two" aria-hidden="true">✧</span>
+        <div class="room-garland" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><i></i>
+        </div>
+        <div class="room-window" aria-hidden="true">
+          <span class="window-sky"></span>
+          <span class="window-curtain curtain-left"></span>
+          <span class="window-curtain curtain-right"></span>
+          <span class="window-sill"></span>
+        </div>
+        <div class="room-shelf" aria-hidden="true">
+          <span class="shelf-vase">♡</span>
+          <span class="shelf-book book-one"></span>
+          <span class="shelf-book book-two"></span>
+        </div>
+          <article id="home-board" class="home-board" aria-label="可移动公告板">
+            <button id="board-drag-handle" class="board-heading" type="button" aria-label="拖动公告板">
+              <span>今日陪伴</span><small>按住可移动</small>
+            </button>
+            <button id="daily-question-card" class="board-question" type="button">
+              <span id="board-question-text">今天好好吃饭了嘛？</span>
+              <strong id="board-question-status">待回答</strong>
+            </button>
+            <div class="board-actions">
+              <button id="board-mode-toggle" type="button"><span>♡</span><b>休闲模式</b></button>
+              <button id="board-open-memo" type="button"><span>✓</span><b>今日事项</b></button>
+            </div>
+          </article>
+          <div id="speech-bubble" class="speech-bubble" hidden></div>
+          <button id="mobile-pet" type="button" aria-label="三好兔，可以点击、拖动或双指缩放">
+            <img id="mobile-pet-sprite" src="/spritesheet.webp" alt="" draggable="false" aria-hidden="true" />
+          </button>
+          <div class="room-rug" aria-hidden="true"></div>
+        </section>
+      </section>
+
+      <section id="page-chat" class="app-page content-page" data-page="chat" aria-label="聊聊天" hidden>
+        <header class="page-header chat-page-header">
+          <div class="page-brand"><span class="page-brand-logo" aria-hidden="true"><img src="/rabbit-head.png" alt="" draggable="false" /></span><h1><img class="page-brand-title title-chat" src="/title-chat.png" alt="说说话" /></h1></div>
+          <div class="header-actions chat-header-actions">
+            <button id="open-rabbit-memory" class="icon-button" type="button" aria-label="网盘盲盒说明书">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5c2.7-.7 5.3-.2 8 1.5v12c-2.7-1.7-5.3-2.2-8-1.5zM20 5.5c-2.7-.7-5.3-.2-8 1.5v12c2.7-1.7 5.3-2.2 8-1.5z"/></svg>
+            </button>
+            <button id="open-chat-actions" class="icon-button" type="button" aria-label="说说话设置">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.1a3.9 3.9 0 1 0 0 7.8 3.9 3.9 0 0 0 0-7.8Z"/><path d="M19.1 13.4a7.6 7.6 0 0 0 0-2.8l2-1.5-2-3.4-2.5 1a8.5 8.5 0 0 0-2.4-1.4L13.8 2h-3.6l-.4 3.3a8.5 8.5 0 0 0-2.4 1.4l-2.5-1-2 3.4 2 1.5a7.6 7.6 0 0 0 0 2.8l-2 1.5 2 3.4 2.5-1a8.5 8.5 0 0 0 2.4 1.4l.4 3.3h3.6l.4-3.3a8.5 8.5 0 0 0 2.4-1.4l2.5 1 2-3.4-2-1.5Z"/></svg>
+            </button>
+          </div>
+        </header>
+        <div id="chat-log" class="chat-log page-chat-log" aria-live="polite"></div>
+        <div id="chat-selection-bar" class="chat-selection-bar" hidden>
+          <button id="cancel-chat-selection" type="button">取消</button>
+          <strong id="chat-selection-count">已选 0 条</strong>
+          <button id="delete-selected-chat" class="danger" type="button" disabled>删除</button>
+        </div>
+        <form id="chat-form" class="chat-form page-chat-form">
+          <div class="app-chat-compose">
+            <div class="app-chat-entry">
+              <textarea id="chat-input" rows="1" maxlength="500" autocomplete="off" enterkeyhint="enter" aria-label="聊天内容" placeholder="想翻点什么？跟我说说……"></textarea>
+              <button type="submit">发送</button>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <section id="page-memo" class="app-page content-page" data-page="memo" aria-label="备忘录" hidden>
+        <header class="page-header"><div class="page-brand"><span class="page-brand-logo" aria-hidden="true"><img src="/rabbit-head.png" alt="" draggable="false" /></span><h1><img class="page-brand-title title-memo" src="/title-memo.png" alt="备忘录" /></h1></div><div class="header-actions"><span class="icon-button memo-apple-decoration" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12.1 7.2c-1.9-3-5.1-2.8-6.7-.8-2.3 2.9-.6 9.7 2.5 13.7M11.9 7.2c1.9-3 5.1-2.8 6.7-.8 2.3 2.9.6 9.7-2.5 13.7M8 20c1.4-.8 2.7-.9 4-.1 1.3-.8 2.6-.7 4 .1M12 7.1c-.3-2.3.6-3.9 2.7-4.8"/><path d="M13.1 3.2c1.3.1 2.2.6 2.8 1.5"/></svg></span><button id="add-memo" class="round-add" type="button" aria-label="新建内容"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div></header>
+        <aside id="memo-companion" class="memo-companion" aria-live="polite" hidden>
+          <p id="memo-companion-bubble">今天想先完成哪一件？</p>
+          <div id="memo-companion-menu" class="memo-companion-menu" aria-label="悬浮三好兔菜单" hidden>
+            <div class="companion-actions">
+              <button type="button" data-memo-pet-action="interact">互动一下</button>
+              <button type="button" data-memo-pet-action="chat">悬浮聊天</button>
+            </div>
+            <details><summary>模式与大小</summary><div class="companion-actions"><button type="button" data-memo-pet-action="leisure">休闲模式</button><button type="button" data-memo-pet-action="mode"><b id="memo-mode-label">工作模式</b></button></div>
+            <label class="companion-size">大小 <output id="memo-size-value">45%</output><input id="memo-size-slider" aria-label="兔子大小" type="range" min="30" max="120" value="45" /></label></details>
+            <details><summary>专注计时</summary>
+            <div class="companion-actions"><button type="button" data-memo-pet-action="focus15">专注 15 分钟</button><button type="button" data-memo-pet-action="focus25">专注 25 分钟</button><button type="button" data-memo-pet-action="pause">暂停 / 继续</button><button type="button" data-memo-pet-action="cancel">结束专注</button></div>
+            <small id="memo-focus-status">尚未开始专注</small>
+            </details>
+            <form id="memo-chat-form" class="chat-form" hidden><input id="memo-chat-input" aria-label="悬浮聊天输入" maxlength="80" placeholder="和三好兔说说话……" autocomplete="off"/><button type="submit">发送</button></form>
+            <div class="companion-actions"><button type="button" data-memo-pet-action="close">收起菜单</button><button type="button" data-memo-pet-action="hide">隐藏兔子</button></div>
+          </div>
+          <button id="memo-companion-pet" type="button" aria-label="和悬浮三好兔互动">
+            <img src="/spritesheet.webp" alt="" draggable="false" aria-hidden="true" />
+          </button>
+        </aside>
+        <div class="memo-summary">
+          <button id="memo-daily-card" class="summary-card accent" type="button"><small>每日询问</small><strong id="memo-daily-status">待完成</strong><span id="memo-daily-text">今天好好吃饭了嘛？</span></button>
+          <button id="open-timer" class="summary-card" type="button"><small>专注倒计时</small><strong id="memo-timer-status">未开始</strong><span>让三好兔陪你专注</span></button>
+        </div>
+        <div class="memo-dashboard">
+          <section class="memo-board memo-todo-board" aria-labelledby="memo-todo-heading">
+            <header class="memo-board-heading"><h2 id="memo-todo-heading">待办事项 <span id="memo-progress">今日 0 · 共 0</span></h2><button id="add-todo" class="memo-board-add" type="button">＋ 待办</button></header>
+            <div id="memo-list" class="memo-list"></div>
+            <div id="memo-empty" class="memo-empty-compact"><span><svg class="empty-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></span><p>接下来要做什么？</p></div>
+          </section>
+          <section class="memo-board memo-countdown-board" aria-labelledby="memo-countdown-heading">
+            <header class="memo-board-heading"><h2 id="memo-countdown-heading">倒数日 <span id="countdown-count">1 个</span></h2><button id="add-countdown" class="memo-board-add" type="button">＋ 倒数</button></header>
+            <div id="countdown-list" class="countdown-list"></div>
+            <div id="countdown-empty" class="memo-empty-compact" hidden><span>⌁</span><p>下一份期待，会在这里慢慢靠近</p></div>
+          </section>
+          <section class="memo-board memo-anniversary-board" aria-labelledby="memo-anniversary-heading">
+            <header class="memo-board-heading"><h2 id="memo-anniversary-heading">纪念日 <span id="anniversary-count">0 个</span></h2><button id="add-anniversary" class="memo-board-add" type="button">＋ 纪念</button></header>
+            <div id="anniversary-list" class="countdown-list anniversary-list"></div>
+            <div id="anniversary-empty" class="memo-empty-compact"><span><svg class="empty-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></span><p>把一起走过的日子珍藏起来</p></div>
+          </section>
+          <section class="memo-board memo-note-board" aria-labelledby="memo-note-heading">
+            <header class="memo-board-heading"><h2 id="memo-note-heading">便签本 <span id="note-count">0 条</span></h2><button id="add-note" class="memo-board-add" type="button">＋ 便签</button></header>
+            <div id="note-list" class="note-list"></div>
+            <div id="note-empty" class="memo-empty-compact note-empty"><span><svg class="empty-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></span><p>写下一点小小的想法吧</p></div>
+          </section>
+          <section class="memo-board memo-moment-board" aria-labelledby="memo-moment-heading">
+            <header class="memo-board-heading"><h2 id="memo-moment-heading">碎碎念 <span id="moment-count">0 条</span></h2><button id="add-moment" class="memo-board-add" type="button">＋ 碎碎念</button></header>
+            <div id="moment-list" class="moment-list"></div>
+            <div id="moment-empty" class="memo-empty-compact"><span><svg class="empty-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></span><p>把冒出来的小心情，悄悄收好呀 ♡</p></div>
+          </section>
+        </div>
+        <section id="note-detail-view" class="memo-note-detail" aria-label="编辑便签" hidden>
+          <header class="note-detail-header"><button id="close-note-detail" class="centered-back" type="button" aria-label="返回备忘录"><img class="header-icon" src="/header-back.svg" alt="" /></button><button id="save-note" type="button">保存</button><strong id="note-detail-heading">便签本</strong><input id="note-header-time" class="editor-header-date" type="datetime-local" aria-label="便签日期" data-compact-date="true" /></header>
+          <input id="note-title-input" class="note-title-input" maxlength="50" placeholder="写一个标题" />
+          <div class="rich-text-toolbar" data-rich-target="note-body-input"><button id="add-note-media" type="button">插入图频</button><button type="button" data-rich-action="h1">大标题</button><button type="button" data-rich-action="h2">小标题</button><button type="button" data-rich-action="h3">副标题</button><button type="button" data-rich-action="body">正文</button><button type="button" data-rich-action="bold">加粗</button><button type="button" data-rich-action="bullet">列表</button><button type="button" data-rich-action="ordered">编号</button><button type="button" data-rich-action="quote">引用</button><button type="button" data-rich-action="link">链接</button><button type="button" data-rich-action="table">表格</button></div>
+          <input id="note-media-input" type="file" accept="image/*,video/*" aria-label="选择便签图片或视频" hidden />
+          <div id="note-body-input" class="note-body-input rich-text-editor" contenteditable="true" role="textbox" aria-multiline="true" data-placeholder="从这里写下想记住的事……"></div>
+          <footer class="note-detail-footer"><small id="note-updated-text"></small><button id="delete-note" type="button" hidden>删除便签</button></footer>
+        </section>
+        <section id="moment-detail-view" class="memo-note-detail memo-moment-detail" aria-label="编辑碎碎念" hidden>
+          <header class="note-detail-header"><button id="close-moment-detail" class="centered-back" type="button" aria-label="返回备忘录"><img class="header-icon" src="/header-back.svg" alt="" /></button><button id="save-moment" type="button">保存</button><strong id="moment-detail-heading">碎碎念</strong><input id="moment-date-input" class="editor-header-date moment-header-date" type="date" aria-label="碎碎念日期" data-compact-date="true" /></header>
+          <div id="moment-body-input" class="note-body-input moment-body-input rich-text-editor" contenteditable="true" role="textbox" aria-multiline="true" data-placeholder="这一刻……"></div>
+          <footer class="note-detail-footer"><small id="moment-updated-text"></small><button id="delete-moment" type="button" hidden>删除</button></footer>
+        </section>
+      </section>
+
+      <section id="page-profile" class="app-page content-page profile-page" data-page="profile" aria-label="我的" hidden>
+        <div class="profile-fixed-top">
+          <div class="profile-peek-art" aria-hidden="true">
+            <img src="/profile-header-rabbit.png" alt="" draggable="false" />
+          </div>
+          <section class="profile-hero">
+            <img class="profile-rabbit-head" src="/rabbit-head.png" alt="三好兔头像" draggable="false" />
+            <div><strong id="profile-pet-name">三好兔</strong><small>兔兔会一直在这里陪着你的喔</small></div>
+          </section>
+        </div>
+        <div class="profile-scroll-content">
+        <h2 class="settings-title">兔兔的小角落</h2>
+        <div class="settings-group profile-card">
+          <button id="enable-overlay" class="setting-button" type="button"><span><b>跟着你逛逛</b><small>兔兔跟着你，点点就回应呀</small></span><i class="overlay-switch" aria-hidden="true"></i></button>
+          <button id="enable-live-activity" class="setting-button" type="button" title="长按调整颜色"><span><b>在岛上等你</b><small>屏幕外的小角落，也有兔兔陪着你</small></span><i class="overlay-switch" aria-hidden="true"></i></button>
+          <div class="setting-row"><span><b>可爱放大一点</b><small>兔兔大小，调到你喜欢的</small></span><div class="stepper"><button id="profile-size-minus" type="button" aria-label="缩小兔兔">−</button><output id="profile-size-value">45%</output><button id="profile-size-plus" type="button" aria-label="放大兔兔">＋</button></div></div>
+          <button id="reset-mobile-pet" class="setting-button" type="button"><span><b>回到小窝窝</b><small>让兔兔回到默认位置</small></span><i>›</i></button>
+        </div>
+        <h2 class="settings-title">今天也要甜一点</h2>
+        <div class="settings-group profile-card">
+          <button id="open-daily-settings" class="setting-button" type="button"><span><b>今天的小约定</b><small id="daily-setting-summary">今天好好吃饭了嘛？ · 每天 20:00</small></span><i>›</i></button>
+          <button id="profile-open-timer" class="setting-button" type="button"><span><b>陪你认真一会儿</b><small>选一段专注时间</small></span><i>›</i></button>
+          <button id="open-meal-settings" class="setting-button" type="button"><span><b>肚子咕噜咕噜</b><small>今天吃什么，兔兔帮你选</small></span><i>›</i></button>
+        </div>
+        <h2 class="settings-title">小事别忘啦</h2>
+        <div class="settings-group profile-card">
+          <button id="open-weather-settings" class="setting-button" type="button"><span><b>天气小叮咛</b><small id="weather-setting-summary">未开启 · 每天 08:00 · 使用系统定位</small></span><i>›</i></button>
+
+          <button id="open-reminder-settings" class="setting-button" type="button"><span><b>轻轻叫你一声</b><small>铃声、震动，选你喜欢的</small></span><i>›</i></button>
+          <button id="open-meal-reminders" class="setting-button" type="button"><span><b>好好吃饭</b><small id="meal-reminder-summary">未开启 · 早餐 08:00 · 午餐 13:00 · 晚餐 18:00</small></span><i>›</i></button>
+        </div>
+        <h2 class="settings-title">有话悄悄说</h2>
+        <div class="settings-group profile-card">
+          <button id="open-user-guide" class="setting-button" type="button"><span><b>兔兔的说明书</b><small>兔兔的小诀窍，都收在这里啦</small></span><i>›</i></button>
+          <button id="open-developer-contact" class="setting-button" type="button"><span><b>给我们捎句话</b><small>有什么小想法，都可以在这里反馈喔</small></span><i>›</i></button>
+          <button id="export-data" class="setting-button" type="button"><span><b>收拾小口袋</b><small>导出记录，整理留下的小事</small></span><i>›</i></button>
+          <button id="open-version-info" class="setting-button" type="button"><span><b>兔兔成长日记</b><small>看看这次又长大了多少</small></span><i>›</i></button>
+        </div>
+        </div>
+      </section>
+
+      <nav class="mobile-dock" aria-label="一级导航">
+        <button class="nav-item active" type="button" data-nav="home" aria-label="首页">
+          <img class="nav-art-icon" src="/nav-home.png" alt="" draggable="false" aria-hidden="true" /><small>首页</small>
+        </button>
+        <button class="nav-item" type="button" data-nav="chat" aria-label="说说话">
+          <img class="nav-art-icon" src="/nav-chat.png" alt="" draggable="false" aria-hidden="true" /><small>说说话</small>
+        </button>
+        <button class="nav-item" type="button" data-nav="memo" aria-label="备忘录">
+          <img class="nav-art-icon" src="/nav-memo.png" alt="" draggable="false" aria-hidden="true" /><small>备忘录</small>
+        </button>
+        <button class="nav-item" type="button" data-nav="profile" aria-label="我的">
+          <img class="nav-art-icon" src="/nav-profile.png" alt="" draggable="false" aria-hidden="true" /><small>我的</small>
+        </button>
+      </nav>
+
+      <div id="sheet-backdrop" class="sheet-backdrop" hidden></div>
+      <section id="ledger-design-panel" class="ledger-page" aria-label="兔兔的小账本" hidden>
+        <div class="sheet-body"><iframe id="ledger-design-frame" src="/ledger.html?embedded=1" title="兔兔的小账本"></iframe></div>
+      </section>
+      <section id="health-panel" class="ledger-page" aria-label="陪伴健康" hidden>
+        <div class="sheet-body"><iframe id="health-frame" src="/health.html?embedded=1" title="陪伴健康"></iframe></div>
+      </section>
+      <section id="habit-panel" class="ledger-page" aria-label="习惯打卡" hidden>
+        <div class="sheet-body"><iframe id="habit-frame" src="/health.html?embedded=1&mode=habits" title="习惯打卡"></iframe></div>
+      </section>
+      <section id="timetable-panel" class="ledger-page" aria-label="课程表" hidden><div class="sheet-body"><iframe id="timetable-frame" src="/timetable.html?embedded=1&v=20261013" title="课程表"></iframe></div></section>
+      <section id="memo-companion-books" class="mobile-sheet compact-sheet" aria-label="陪伴小本" hidden>
+        <div class="sheet-heading"><h2>陪伴小本</h2><button type="button" data-close-sheet aria-label="关闭">×</button></div>
+        <button id="memo-book-ledger" class="setting-button" type="button"><span><b>兔兔的小账本</b><small>小钱钱，都帮你记着呢</small></span><i>›</i></button>
+        <button id="memo-book-health" class="setting-button" type="button"><span><b>陪伴健康</b><small>餐食、体重和运动，陪你慢慢记</small></span><i>›</i></button>
+        <button id="memo-book-habits" class="setting-button" type="button"><span><b>习惯打卡</b><small>每天一件小事，养成喜欢的自己</small></span><i>›</i></button>
+        <button id="memo-book-timetable" class="setting-button" type="button"><span><b>课程表</b><small>一周的课，陪你慢慢安排</small></span><i>›</i></button>
+      </section>
+      <section id="weather-settings-panel" class="mobile-sheet compact-sheet" hidden aria-label="天气小叮咛">
+        <div class="sheet-handle" aria-hidden="true"></div>
+        <div class="sheet-heading"><h2>天气小叮咛</h2><button type="button" data-close-sheet aria-label="关闭">×</button></div>
+        <label class="switch-row"><span><b>开启天气提醒</b></span><input id="weather-enabled" type="checkbox" /></label>
+        <div id="weather-bulletin" class="weather-bulletin" hidden><p id="weather-bulletin-text"></p><div class="weather-speech-actions"><button id="weather-speak" type="button" class="secondary-action">听听天气</button><button id="weather-stop" type="button" class="secondary-action">先停一下</button></div></div>
+        <div class="weather-rule-list" aria-label="提醒内容">
+          <label><span>降温添衣</span><input type="checkbox" data-weather-rule="cold" checked /></label>
+          <label><span>炎热补水</span><input type="checkbox" data-weather-rule="heat" checked /></label>
+          <label><span>下雨带伞</span><input type="checkbox" data-weather-rule="rain" checked /></label>
+          <label><span>防晒与防风</span><input type="checkbox" data-weather-rule="sunWind" checked /></label>
+        </div>
+        <div class="weather-time-heading"><b>提醒时间</b><button id="weather-add-time" type="button">＋ 添加</button></div>
+        <div id="weather-times" class="weather-times"></div>
+        <p id="weather-status" class="companion-settings-help" role="status" hidden></p>
+        <button id="weather-refresh" class="wide-primary" type="button">更新天气</button>
+        <a id="weather-credit" class="weather-credit" hidden target="_blank" rel="noopener"><img alt="Apple Weather" />Apple Weather · 天气数据来源与法律信息</a>
+        <p class="sheet-ending">降温添件衣，下雨带把伞，兔兔会提醒你。</p>
+      </section>
+      <section id="meal-settings-panel" class="mobile-sheet" hidden aria-label="今天吃什么">
+        <div class="sheet-handle" aria-hidden="true"></div>
+        <div class="sheet-heading"><h2>今天吃什么</h2><button type="button" data-close-sheet aria-label="关闭">×</button></div>
+        <div class="meal-choice-card"><p id="meal-result" class="meal-result" role="status">兔兔帮你从喜欢的菜单里选一顿</p>
+        <button id="meal-pick" class="wide-primary" type="button">帮我选一顿</button></div>
+        <div class="meal-menu-editor">
+        <label class="field-label">加一道喜欢的菜<div class="meal-add-row"><input id="meal-add-input" maxlength="40" placeholder="比如 番茄鸡蛋面" /><button id="meal-add" type="button">添加</button></div></label>
+        <div id="meal-options" class="meal-options" aria-label="我的候选菜单"></div>
+        </div>
+        
+      </section>
+      <section id="version-info-panel" class="mobile-sheet compact-sheet" hidden aria-label="版本信息">
+        <div class="sheet-handle" aria-hidden="true"></div>
+        <div class="sheet-heading"><h2>版本信息</h2><button type="button" data-close-sheet aria-label="关闭">×</button></div>
+        <div class="version-info-card"><img src="/rabbit-head.png" alt="三好兔" draggable="false" /><div class="version-info-copy"><b>好好想想</b><p>陪你把日子慢慢过好</p></div><span id="app-version-number" class="version-info-number"></span></div>
+      </section>
+      <section id="records-panel" class="mobile-sheet" hidden aria-label="记录与清理">
+        <div class="sheet-heading"><h2>记录与清理</h2><button type="button" data-close-sheet aria-label="关闭">×</button></div>
+        <div id="records-groups"></div>
+      </section>
+      <section id="chat-record-panel" class="mobile-sheet compact-sheet" hidden aria-label="整理这条记录">
+        <div class="sheet-heading"><h2>这条记录</h2><button type="button" data-close-sheet aria-label="关闭">×</button></div>
+        <button type="button" class="setting-button" data-record-favorite><b>收藏这条</b><i>›</i></button>
+        <button type="button" class="setting-button danger" data-record-delete><b>删除这条</b><i>›</i></button>
+        <p class="sheet-ending">想留下的，就留着吧 (・∀・)</p>
+      </section>
+      <section id="archive-range-panel" class="mobile-sheet" hidden aria-label="时间跨度">
+        <div class="sheet-heading"><h2>时间跨度</h2><button type="button" data-close-sheet aria-label="关闭">×</button></div>
+        <div id="archive-range-calendars"></div>
+        <input id="archive-range-start" type="hidden"/><input id="archive-range-end" type="hidden"/>
+        <button id="save-archive-range" type="button" class="wide-primary">收好这段日子</button>
+        <p class="sheet-ending">这一段日子，慢慢翻 (｡•ᴗ•｡)</p>
+      </section>
+
+      <section id="mobile-menu" class="mobile-sheet" hidden aria-label="三好兔菜单">
+        <div class="sheet-handle" aria-hidden="true"></div>
+        <div class="sheet-heading">
+          <div><p class="sheet-eyebrow">三好兔</p><h2>陪伴设置</h2></div>
+          <button type="button" data-close-sheet aria-label="关闭">×</button>
+        </div>
+
+        <div class="mode-switch" aria-label="陪伴模式">
+          <button id="mode-leisure" class="selected" type="button">休闲模式</button>
+          <button id="mode-work" type="button">工作模式</button>
+        </div>
+
+        <div class="menu-row size-row">
+          <div><strong>显示大小</strong><small>也可以直接双指缩放</small></div>
+          <div class="stepper">
+            <button id="size-minus" type="button" aria-label="缩小">−</button>
+            <output id="mobile-size-value">45%</output>
+            <button id="size-plus" type="button" aria-label="放大">＋</button>
+          </div>
+        </div>
+
+        <button id="menu-timer" class="menu-link" type="button"><img src="/menu-icon-timer.png" alt="" aria-hidden="true" /><span>倒计时与提醒</span><b>›</b></button>
+        <button id="menu-chat" class="menu-link" type="button"><img src="/menu-icon-chat.png" alt="" aria-hidden="true" /><span>和三好兔说话</span><b>›</b></button>
+        <button id="toggle-home-board" class="menu-link" type="button"><img src="/menu-icon-board.png" alt="" aria-hidden="true" /><span id="home-board-toggle-label">隐藏今日陪伴</span><b>›</b></button>
+        <p class="sheet-ending">今天也慢慢来，我会在这里陪你 (｡•ᴗ•｡)</p>
+      </section>
+
+      <section id="user-guide-panel" class="mobile-sheet guide-sheet" hidden aria-label="三好兔说明书">
+        <div class="sheet-handle" aria-hidden="true"></div>
+        <div class="sheet-heading">
+          <div><p class="sheet-eyebrow">一起玩吧</p><h2>三好兔说明书</h2></div>
+          <button type="button" data-close-sheet aria-label="关闭">×</button>
+        </div>
+        <div class="guide-content"></div>
+      </section>
+
+      <section id="developer-contact-panel" class="mobile-sheet contact-sheet" hidden aria-label="联系开发者">
+        <div class="sheet-handle" aria-hidden="true"></div>
+        <div class="sheet-heading">
+          <div><p class="sheet-eyebrow">反馈与交流</p><h2>联系开发者</h2></div>
+          <button type="button" data-close-sheet aria-label="关闭">×</button>
+        </div>
+        <div class="developer-card">
+          <div class="developer-mark" aria-hidden="true">🍎</div>
+          <div><strong>苹果只是成为苹果</strong><small>如果有想反馈的内容，可以来找苹果</small></div>
+        </div>
+        <div class="contact-links">
+          <button id="copy-wechat-public-name" type="button"><span><b>公众号</b><small>松你一饼</small></span><i>联系公众号</i></button>
+          <a href="https://example.com" target="_blank" rel="noreferrer"><span><b>小红书</b><small>🍎</small></span><i>打开主页</i></a>
+          <a href="https://example.com" target="_blank" rel="noopener noreferrer"><span><b>抖音</b><small>CONTACT_HANDLE</small></span><i>打开主页</i></a>
+          <button id="copy-wechat-id" type="button"><span><b>微信</b><small>苹果</small></span><i>复制微信号</i></button>
+        </div>
+        <p class="sheet-ending">有问题或小想法，都可以来找苹果呀 (˶ˊᵕˋ˵)</p>
+      </section>
+
+      <section id="rabbit-memory-panel" class="mobile-sheet rabbit-memory-sheet" hidden aria-label="小兔记忆">
+        <div class="sheet-handle" aria-hidden="true"></div>
+        <div class="sheet-heading">
+          <div><p class="sheet-eyebrow">只保存在本机</p><h2>小兔记忆</h2></div>
+          <button type="button" data-close-sheet aria-label="关闭">×</button>
+        </div>
+        <form id="rabbit-memory-form" class="rabbit-memory-form">
+          <label><span>你的名字</span><input id="memory-name" maxlength="20" placeholder="比如 灯灯" /></label>
+          <label><span>希望小兔怎么称呼你</span><input id="memory-preferred-address" maxlength="20" placeholder="比如 my light" /></label>
+          <div class="rabbit-memory-pair">
+            <label><span>你对小兔来说是</span><input id="memory-user-role" maxlength="20" placeholder="比如 朋友" /></label>
+            <label><span>小兔对你来说是</span><input id="memory-pet-role" maxlength="20" placeholder="比如 陪伴你的朋友" /></label>
+          </div>
+          <label><span>你的偏好</span><input id="memory-likes" maxlength="120" placeholder="写下喜欢的东西，比如 苹果、舞台、粉色" /></label>
+          <button id="save-rabbit-memory" class="memory-save-button wide-primary" type="submit">保存小兔记忆</button>
+        </form>
+        <p class="sheet-ending">聊天会自动更新这里；你也可以亲手修改，冲突时以最近一次更新为准，只保存在这台设备上 ♡</p>
+      </section>
+
+      <section id="chat-actions-panel" class="mobile-sheet chat-actions-sheet" hidden aria-label="说说话设置">
+        <div class="sheet-handle" aria-hidden="true"></div>
+        <div class="sheet-heading">
+          <div><h2>说说话设置</h2></div>
+          <button type="button" data-close-sheet aria-label="关闭">×</button>
+        </div>
+        <label class="font-size-control chat-inline-font"><span>字号</span><input id="chat-font-size" type="range" min="10" max="30" step="1" aria-label="聊天字体大小" /><output id="chat-font-summary">17</output></label>
+        <button id="start-chat-selection" class="setting-button" type="button"><span><b>多选删除</b><small>选中后删除</small></span><i>›</i></button>
+        <button id="start-chat-favorite-selection" class="setting-button" type="button"><span><b>多选收藏</b><small>一起收进收藏夹</small></span><i>›</i></button>
+        <button id="open-chat-favorites" class="setting-button" type="button"><span><b>查看收藏夹</b><small id="chat-favorites-summary">还没有收藏</small></span><i>›</i></button>
+        <button id="open-archive-range" class="setting-button" type="button"><span><b>时间跨度</b><small>挑一段日子</small></span><i>›</i></button>
+        <button id="open-chat-appearance" class="setting-button" type="button"><span><b>页面外观</b><small>头像、背景与颜色</small></span><i>›</i></button>
+        <button id="open-chat-mode" class="setting-button" type="button"><span><b>切换模式</b><small id="chat-mode-summary">网盘盲盒</small></span><i>›</i></button>
+        <p class="sheet-ending">想整理一下也没关系，确认好再动手就好。</p>
+      </section>
+
+      <section id="chat-mode-panel" class="mobile-sheet" hidden aria-label="切换模式">
+        <div class="sheet-heading"><h2>想怎么聊呢</h2><button type="button" data-close-sheet aria-label="关闭">×</button></div>
+        <button type="button" class="setting-button chat-mode-choice" data-chat-mode="archive" aria-pressed="true"><span><b>网盘盲盒</b><small>翻翻照片、视频和与灯书</small></span><i aria-hidden="true">✓</i></button>
+        <button type="button" class="setting-button chat-mode-choice" data-chat-mode="chat" aria-pressed="false"><span><b>聊天</b><small>聊聊刚发生的事，也听听你的小心情</small></span><i aria-hidden="true">✓</i></button>
+        <div class="chat-model-download" aria-live="polite">
+          <div class="chat-model-copy"><b>离线聊天资源</b><p id="chat-model-status">下载后，就能离线慢慢聊啦</p></div>
+          <div class="chat-model-actions"><button id="download-chat-model" type="button">下载聊天资源</button><button id="cancel-chat-model-download" type="button" hidden>暂停</button></div>
+          <progress id="chat-model-progress" max="1" value="0" hidden aria-label="聊天资源下载进度"></progress>
+        </div>
+        <p class="sheet-ending">想翻翻回忆，还是慢慢说说，都陪着你 (｡•ᴗ•｡)</p>
+      </section>
+      <section id="live-style-choices" class="mobile-sheet" hidden aria-label="实时活动颜色">
+        <div class="sheet-heading"><h2>给兔兔换个颜色</h2><button type="button" data-close-sheet aria-label="关闭">×</button></div>
+        <button id="live-style-lock" type="button" class="setting-button"><span><b>锁屏小窗</b><small>一亮屏，就能看见兔兔</small></span><i>›</i></button>
+        <button id="live-style-island" type="button" class="setting-button"><span><b>灵动岛小窗</b><small>小小一角，也陪着你</small></span><i>›</i></button>
+        <p class="sheet-ending">挑一件喜欢的，兔兔穿给你看 (｡•ᴗ•｡)</p>
+      </section>
+      <section id="live-style-panel" class="mobile-sheet" hidden aria-label="实时活动外观">
+        <div class="sheet-heading"><h2>锁屏小窗</h2><button type="button" data-close-sheet aria-label="关闭">×</button></div>
+        <div class="live-style-preview"><canvas width="192" height="208" aria-label="兔兔"></canvas><div class="live-preview-copy"><p>兔兔在这里，陪你一会儿</p><div class="live-preview-actions"><span>跳跳</span><span>wink</span><span>晕晕</span><span>吃什么</span></div></div></div>
+        <label class="live-color-row"><span>背景</span><input type="color" data-live-color="background" value="#fff1f6"/></label>
+        <label class="live-color-row"><span>气泡</span><input type="color" data-live-color="bubble" value="#fff7e2"/></label>
+        <label class="live-color-row"><span>小按钮</span><input type="color" data-live-color="buttons" value="#ffebf2"/></label>
+        <div class="live-style-actions"><button id="live-style-reset" type="button">恢复原来的颜色</button><button id="live-style-save" type="button">保存颜色</button></div>
+        <p class="sheet-ending">一点喜欢的颜色，也能陪你好久 (｡•ᴗ•｡)</p>
+      </section>
+      <section id="chat-appearance-panel" class="mobile-sheet" hidden aria-label="页面外观">
+        <div class="sheet-heading"><h2>换个喜欢的样子</h2><button type="button" data-close-sheet aria-label="关闭">×</button></div>
+        <button type="button" class="setting-button" data-chat-appearance="background"><b>聊天背景</b><i>›</i></button>
+        <button type="button" class="setting-button" data-chat-appearance="petAvatar"><b>小苏的头像</b><i>›</i></button>
+        <button type="button" class="setting-button" data-chat-appearance="userAvatar"><b>我的头像</b><i>›</i></button>
+        <button type="button" class="setting-button" data-chat-appearance="petColor"><b>左侧气泡</b><i>›</i></button>
+        <button type="button" class="setting-button" data-chat-appearance="userColor"><b>右侧气泡</b><i>›</i></button>
+        <p class="sheet-ending">换个颜色，也换个好心情 (＾＾)</p>
+      </section>
+
+      <section id="chat-favorites-panel" class="mobile-sheet chat-favorites-sheet" hidden aria-label="聊天收藏夹">
+        <div class="sheet-handle" aria-hidden="true"></div>
+        <div class="sheet-heading">
+          <div><p class="sheet-eyebrow">只保存在本机</p><h2>聊天收藏夹</h2></div>
+          <button type="button" data-close-sheet aria-label="关闭">×</button>
+        </div>
+        <div id="chat-favorites-list" class="chat-favorites-list"></div>
+        <div id="chat-favorites-empty" class="chat-favorites-empty"><span>♡</span><p>把喜欢的对话收藏到这里吧</p></div>
+      </section>
+
+      <section id="timer-panel" class="mobile-sheet" hidden aria-label="倒计时">
+        <div class="sheet-handle" aria-hidden="true"></div>
+        <div class="sheet-heading">
+          <div><p class="sheet-eyebrow">一起专注</p><h2>倒计时</h2></div>
+          <button type="button" data-close-sheet aria-label="关闭">×</button>
+        </div>
+        <div class="timer-presets">
+          <button type="button" data-minutes="15">15 分钟</button>
+          <button type="button" data-minutes="25" class="selected">25 分钟</button>
+          <button type="button" data-minutes="45">45 分钟</button>
+          <button type="button" data-minutes="60">60 分钟</button>
+        </div>
+        <div class="custom-time timer-custom-time"><span>自定义时间</span><div class="timer-time-fields"><label><input id="timer-minutes" aria-label="分钟" type="number" min="0" max="180" step="1" value="25" inputmode="numeric" /><span>分</span></label><label><input id="timer-seconds" aria-label="秒" type="number" min="0" max="59" step="1" value="0" inputmode="numeric" /><span>秒</span></label></div></div>
+        <label class="field-label">结束前提醒<select id="focus-remind-before"><option value="0" selected>仅结束时提醒</option><option value="1">提前 1 分钟</option><option value="5">提前 5 分钟</option><option value="10">提前 10 分钟</option></select></label>
+        <div class="timer-actions">
+          <button id="timer-start" class="primary-action" type="button">开始</button>
+          <button id="timer-pause" type="button">暂停</button>
+          <button id="timer-cancel" type="button">取消</button>
+        </div>
+        <p class="sheet-ending">时间到我会叫你，认真一小会儿再一起休息吧 (ง •̀_•́)ง</p>
+      </section>
+
+      <section id="daily-panel" class="mobile-sheet" hidden aria-label="每日询问设置">
+        <div class="sheet-handle" aria-hidden="true"></div>
+        <div class="sheet-heading"><div><p class="sheet-eyebrow">主动陪伴</p><h2>每日询问</h2></div><button type="button" data-close-sheet aria-label="关闭">×</button></div>
+        <label class="switch-row"><span><b>开启每日询问</b><small>没打开 App 时也可以通知你</small></span><input id="daily-enabled" type="checkbox" checked /></label>
+        <label class="field-label">三好兔说什么<input id="daily-message" maxlength="40" value="今天好好吃饭了嘛？" /></label>
+        <label class="field-label">每日提醒时间<input id="daily-time" type="time" value="20:00" /></label>
+        <button id="save-daily-settings" class="wide-primary" type="button">保存并开启提醒</button>
+        <p class="sheet-ending">设好时间我会来找你，手机太认真省电时可能会晚一点点～</p>
+      </section>
+
+      <section id="reminder-settings-panel" class="mobile-sheet" hidden aria-label="提醒设置">
+        <div class="sheet-handle" aria-hidden="true"></div>
+        <div class="sheet-heading"><div><h2>提醒设置</h2></div><button type="button" data-close-sheet aria-label="关闭">×</button></div>
+        
+        <div id="reminder-settings-list" class="reminder-settings-list"></div>
+        <p class="sheet-ending">该记得的小事，兔兔陪你记着</p>
+      </section>
+
+      <section id="reminder-style-panel" class="mobile-sheet" hidden aria-label="选择提醒方式">
+        <div class="sheet-handle" aria-hidden="true"></div>
+        <div class="sheet-heading"><div><h2>选好小提醒</h2></div><button type="button" data-close-sheet aria-label="关闭">×</button></div>
+        <p id="reminder-style-for" class="reminder-intro"></p>
+        <div class="reminder-mode-card">
+          <label class="switch-row"><span><b>弹窗</b><small>到时间，兔兔来敲敲门</small></span><input id="reminder-popup" type="checkbox" checked /></label>
+          <label class="switch-row"><span><b>震动</b><small>轻轻动一下，提醒你记得</small></span><input id="reminder-vibration" type="checkbox" /></label>
+          <div id="reminder-vibration-options" class="reminder-choice" hidden><label class="field-label">怎么震动<select id="reminder-rhythm"><option value="single">轻轻一下</option><option value="double" selected>短短两下</option><option value="slow">慢慢三下</option></select></label><label class="field-label">震动持续多久<select id="reminder-vibration-seconds" aria-label="震动持续时间"></select></label></div>
+          <label class="switch-row"><span><b>铃声</b><small>选一段喜欢的小声音</small></span><input id="reminder-sound" type="checkbox" /></label>
+          <div id="reminder-sound-options" class="reminder-choice" hidden>
+            <label class="field-label">用哪种声音<select id="reminder-tone"><option value="gentle">轻轻叮一下</option><option value="chime">小小风铃</option><option value="three">软软三声</option><option value="import">选一段我的声音</option></select></label>
+            <label class="field-label">响铃持续多久<select id="reminder-sound-seconds" aria-label="响铃持续时间"></select></label>
+            <label class="reminder-audio-picker">选择音频<input id="reminder-audio-file" type="file" accept="audio/*,.mp3,.m4a,.wav,.ogg,.aac,.flac" /></label>
+            <div id="reminder-audio-info" hidden>
+              <p id="reminder-audio-name">选一个喜欢的铃声吧</p>
+              <small>选择 15 秒以内的铃声，不修改原音频，按选好的提醒时长播放</small>
+            </div>
+          </div>
+        </div>
+        
+        <div class="reminder-style-actions"><button id="reminder-style-back" type="button">返回</button><button id="reminder-preview" class="reminder-preview" type="button">试一下</button><button id="save-reminder-style" class="wide-primary" type="button">保存</button></div>
+        <p class="sheet-ending">选好啦，到时间轻轻提醒你</p>
+      </section>
+
+      <section id="daily-answer-panel" class="mobile-sheet compact-sheet" hidden aria-label="今日询问">
+        <div class="sheet-handle" aria-hidden="true"></div>
+        <h2 id="daily-answer-question">今天好好吃饭了嘛？</h2>
+        <div class="daily-greeting"><img src="/rabbit-head.png" alt="三好兔" draggable="false" /><div><b>兔兔来问候你啦～</b><p>今天这件小事，做得怎么样呀</p></div><button id="daily-dismiss" class="text-button" type="button">稍后再问</button></div>
+        <div class="daily-answer-actions"><button id="daily-done" class="wide-primary" type="button">做啦</button><button id="daily-not-yet" type="button">还没有</button></div>
+        <p class="sheet-ending">不急不急，晚一点再见也可以呀。</p>
+      </section>
+
+      <section id="memo-editor-panel" class="mobile-sheet" hidden aria-label="新建事项">
+        <div class="sheet-handle" aria-hidden="true"></div>
+        <div class="sheet-heading"><div><p class="sheet-eyebrow">待办事项</p><h2 id="memo-editor-heading">要记下什么？</h2></div><button type="button" data-close-sheet aria-label="关闭">×</button></div>
+        <label class="field-label">待办名称<input id="memo-title-input" maxlength="40" placeholder="比如 取快递" /></label>
+        <label class="switch-row memo-reminder-switch"><span><b>开启提醒</b></span><input id="memo-reminder-enabled" type="checkbox" /></label>
+        <div id="memo-reminder-options" class="memo-reminder-options" hidden>
+          <label class="field-label">提醒日期<input id="memo-reminder-date-input" type="date" /></label>
+          <label class="field-label">事项时间<input id="memo-time-input" type="time" /></label>
+          <label class="field-label">什么时候提醒<select id="memo-remind-before"><option value="0" selected>到点提醒</option><option value="5">提前 5 分钟</option><option value="10">提前 10 分钟</option><option value="30">提前 30 分钟</option><option value="60">提前 1 小时</option></select></label>
+        </div>
+        <button id="save-memo" class="wide-primary" type="button">保存待办</button>
+      </section>
+
+      <section id="memo-create-panel" class="mobile-sheet compact-sheet" hidden aria-label="新建备忘内容">
+        <div class="sheet-handle" aria-hidden="true"></div>
+        <div class="sheet-heading"><div><h2>新建内容</h2></div><button type="button" data-close-sheet aria-label="关闭">×</button></div>
+        <div class="memo-create-grid">
+          <button id="create-todo" type="button"><img src="/memo-icon-todo.png" alt="" aria-hidden="true" /><b>待办事项</b></button>
+          <button id="create-countdown" type="button"><img src="/memo-icon-countdown.png" alt="" aria-hidden="true" /><b>倒数日</b></button>
+          <button id="create-anniversary" class="create-anniversary" type="button"><img src="/memo-icon-anniversary.png" alt="" aria-hidden="true" /><b>纪念日</b></button>
+          <button id="create-note" type="button"><img src="/memo-icon-note.png" alt="" aria-hidden="true" /><b>便签本</b></button>
+          <button id="create-moment" type="button"><img src="/memo-icon-moment.png" alt="" aria-hidden="true" /><b>碎碎念</b></button>
+          <button id="create-focus" type="button"><img src="/menu-icon-timer.png" alt="" aria-hidden="true" /><b>陪你专注</b></button>
+        </div>
+      </section>
+
+      <section id="memo-item-actions-panel" class="mobile-sheet memo-item-actions-sheet" hidden aria-label="条目操作">
+        <div class="sheet-handle" aria-hidden="true"></div>
+        <div class="sheet-heading"><div><p id="memo-item-action-kind" class="sheet-eyebrow">备忘录</p><h2 id="memo-item-action-title">这条记录</h2></div><button type="button" data-close-sheet aria-label="关闭">×</button></div>
+        <div id="memo-item-action-options" class="memo-item-action-options">
+          <button id="memo-item-edit" type="button">修改内容</button>
+          <button id="memo-item-photo-action" type="button">添加照片</button>
+          <button id="memo-item-remove-photo" type="button" hidden>删除照片</button>
+          <button id="memo-item-delete" class="danger" type="button">删除这条</button>
+          <button id="memo-item-cancel" type="button">保留，先不改</button>
+        </div>
+        <div id="memo-item-delete-confirm" class="memo-item-delete-confirm" hidden>
+          <p>删除这条记录？<br>删除后无法恢复。</p>
+          <div><button id="memo-item-confirm-delete" class="danger" type="button">确定删除</button><button id="memo-item-keep" type="button">不删除</button></div>
+        </div>
+        <input id="memo-item-photo-input" type="file" accept="image/*" hidden />
+      </section>
+
+      <section id="countdown-editor-panel" class="mobile-sheet anniversary-editor-sheet" hidden aria-label="新建重要日子">
+        <div class="sheet-handle" aria-hidden="true"></div>
+        <div class="sheet-heading"><div><p class="sheet-eyebrow">重要日子</p><h2 id="countdown-editor-heading">新建倒数日</h2></div><button type="button" data-close-sheet aria-label="关闭">×</button></div>
+        <label class="field-label">日子名称<input id="countdown-title-input" maxlength="40" placeholder="比如 第 x 次见到苏新皓" /></label>
+        <label class="field-label">日期<input id="countdown-date-input" type="date" /></label>
+        <div id="countdown-reminder-options" class="anniversary-reminder-options">
+          <label class="field-label">提前提醒<select id="countdown-remind-before"><option value="-1">不提醒</option><option value="0">当天提醒</option><option value="1" selected>提前 1 天</option><option value="3">提前 3 天</option><option value="7">提前 7 天</option></select></label>
+          <label class="field-label">提醒时间<input id="countdown-remind-time" type="time" value="09:00" /></label>
+        </div>
+        <label id="countdown-photo-picker" class="countdown-photo-picker" hidden>
+          <span><b>纪念照片</b><small>给已经发生的日子留下一张照片</small></span>
+          <span class="countdown-photo-action"><img id="countdown-photo-preview" alt="纪念照片预览" hidden /><i id="countdown-photo-label">选择照片</i></span>
+          <input id="countdown-photo-input" type="file" accept="image/*" hidden />
+        </label>
+        <button id="save-countdown" class="wide-primary" type="button">保存倒数日</button>
+        <p id="countdown-editor-hint" class="sheet-ending">保存后会显示剩余天数。</p>
+      </section>
+
+      <section id="notification-panel" class="mobile-sheet" hidden aria-label="消息中心">
+        <div class="sheet-handle" aria-hidden="true"></div>
+        <div class="sheet-heading"><div><p class="sheet-eyebrow">三好兔</p><h2>消息</h2></div><button type="button" data-close-sheet aria-label="关闭">×</button></div>
+        <div id="notification-list" class="notification-list"><p class="empty-message">暂时没有新消息</p></div>
+        <p class="sheet-ending">该记得的事，放心分给我一点点。</p>
+      </section>
+
+      <section id="memo-reminder-panel" class="mobile-sheet compact-sheet memo-reminder-popup" hidden aria-label="待办提醒" role="alertdialog" aria-live="assertive">
+        <div class="sheet-handle" aria-hidden="true"></div>
+        <div class="reminder-popup-mark" aria-hidden="true">♡</div>
+        <p class="sheet-eyebrow">三好兔来提醒你啦</p>
+        <h2 id="memo-reminder-title">待办时间到</h2>
+        <p id="memo-reminder-message">该去完成这件事啦。</p>
+        <div class="reminder-popup-actions"><button id="memo-reminder-done" class="wide-primary" type="button">知道啦</button><button id="memo-reminder-open" type="button">查看待办</button></div>
+      </section>
+
+      <div id="mobile-toast" class="mobile-toast" hidden role="status"></div>
+    </main>
+  </body>
+</html>

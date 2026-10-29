@@ -1,0 +1,40 @@
+[package]
+name = "sanhao-tune"
+version = "2.2.4"
+description = "一只喜欢跳舞、发呆和窝在小家里陪伴你的三好兔～ᕱ⑅ᕱ ♡"
+authors = ["hikovo"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+# The `_lib` suffix may seem redundant but it is necessary
+# to make the lib name unique and wouldn't conflict with the bin name.
+# This seems to be only an issue on Windows, see https://github.com/rust-lang/cargo/issues/8519
+name = "sanhao_tune_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tauri-plugin-mobile-pet = { path = "../plugins/mobile-pet" }
+
+[target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
+tauri-plugin-single-instance = "2"
+
+
+# Read the optimization guideline for more details: https://tauri.app/concept/size/#cargo-configuration
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = 3
+panic = "abort"
+strip = true
+
+# Backport scene lifecycle and configuration ownership fixes for Xcode 27.
+[patch.crates-io]
+tao = { path = "../vendor/tao" }

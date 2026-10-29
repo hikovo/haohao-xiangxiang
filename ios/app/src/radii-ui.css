@@ -1,0 +1,65 @@
+/* Shared corner sizes for interface surfaces. Artwork, circular switches and
+   chat bubble tails retain their shapes. Keep UIKit navigation in sync. */
+#mobile-app {
+  --radius-control: 12px;
+  --radius-card: 14px;
+  --radius-group: 16px;
+  --radius-dialog: 18px;
+}
+#mobile-app :is(.summary-card, .memo-item, .countdown-card, .note-card, .moment-card,
+  .notification-item, .empty-message, .favorite-card, .chat-favorite-card,
+  .panel-help-card, .reminder-inline-card, .memory-field, .developer-card,
+  .custom-time, .daily-greeting, .menu-row, .meal-result, .countdown-photo-picker,
+  .chat-font-control, .archive-source-card, .rabbit-memory-content section) {
+  border-radius: var(--radius-card);
+}
+#mobile-app :is(.memo-board, .profile-hero, .profile-card, .home-board,
+  .version-info-card, .reminder-group, .reminder-mode-card, .reminder-list-group,
+  .records-group, .weather-rule-list) {
+  border-radius: var(--radius-group);
+}
+#mobile-app :is(.wide-primary, .primary-action, .secondary-action, .menu-link,
+  .memo-board-add, .board-question, .board-actions button, .stepper button,
+  .rich-text-toolbar button, .wheel-value-button, .note-header-time,
+  .note-detail-header > button:not(.centered-back), .timer-presets button,
+  .timer-actions button, .mode-switch, .mode-switch button,
+  .daily-answer-actions button, .memo-item-action-options button,
+  .memo-item-delete-confirm button, .reminder-edit, .reminder-allow,
+  .reminder-preview, .reminder-audio-picker, .reminder-style-actions button,
+  .reminder-time-edit, .archive-link-buttons a, .records-row button,
+  .meal-add-row button, .meal-chip, .cropper-ratios button,
+  .cropper-actions button, .app-confirm button, .reminder-system-help button,
+  .weather-time-heading button, .weather-time-remove,
+  .mobile-sheet .switch-row, .mobile-sheet .setting-row,
+  .mobile-sheet .setting-button, .memo-create-grid button,
+  .chat-customizer button:not(.color-swatch),
+  .mobile-sheet input:not([type=checkbox]):not([type=range]),
+  .mobile-sheet select, .mobile-sheet textarea) {
+  border-radius: var(--radius-control);
+}
+#mobile-app #page-chat :is(.app-chat-entry textarea, .app-chat-entry > button,
+  .chat-selection-bar button) { border-radius: var(--radius-control); }
+#mobile-app #page-profile .profile-hero { border-radius: var(--radius-group); }
+/* Rows share their group's outer contour instead of separate rounded patches. */
+#mobile-app #page-profile .profile-card > :is(.setting-row, .setting-button, .switch-row),
+#mobile-app .reminder-mode-card > .switch-row,
+#mobile-app #reminder-settings-panel .reminder-management-row .setting-button {
+  border-radius: 0;
+}
+#mobile-app #chat-actions-panel .setting-button { border-radius: var(--radius-control); }
+#mobile-app :is(.app-confirm, .chat-customizer, .image-cropper, .wheel-picker,
+  .reminder-system-help) { border-radius: var(--radius-dialog); }
+#mobile-app .mobile-sheet { border-radius: var(--radius-dialog) var(--radius-dialog) 0 0; }
+#mobile-app .mobile-dock { border-radius: var(--radius-dialog); }
+#mobile-app .mobile-dock button { border-radius: var(--radius-control); }
+.native-glass-ready #mobile-app .mobile-dock { border-radius: 0; }
+#ios-floating-rabbit .ios-rabbit-popover { border-radius: 12px; }
+/* Icon-only navigation and close controls are glass circles, not cards. */
+#mobile-app :is(.header-actions > .icon-button, .header-actions > .round-add,
+ .mobile-sheet .sheet-heading > button, .cropper-heading button,
+ .centered-back, button[aria-label="关闭"], .archive-back) {
+ border-radius: 50% !important; aspect-ratio: 1; padding: 0;
+ display: grid; place-items: center;
+}
+#mobile-app :is(.mobile-sheet .sheet-heading > button, .cropper-heading button,
+ button[aria-label="关闭"]) svg { display: block; width: 18px; height: 18px; margin: 0; }

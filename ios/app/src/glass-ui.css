@@ -1,0 +1,98 @@
+/* Preserve the mini-program palette and existing dimensions. UIKit draws the
+   native dock; web cards use translucent surfaces and real backdrop filtering. */
+@property --glass-base {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #fffdf8;
+}
+html { color-scheme: only light; }
+/* The material follows the artwork's alpha, rather than adding a square badge. */
+.page-brand-logo { position: relative; display: block; width: 40px; height: 40px; flex: 0 0 40px; isolation: isolate; }
+.page-brand-logo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.page-brand-logo::before, .page-brand-logo::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  -webkit-mask: url('/rabbit-head.png') center / contain no-repeat;
+  mask: url('/rabbit-head.png') center / contain no-repeat;
+}
+.page-brand-logo::before {
+  background: rgb(255 253 248 / 12%);
+  -webkit-backdrop-filter: blur(8px) saturate(1.03); backdrop-filter: blur(8px) saturate(1.03);
+}
+.page-brand-logo::after {
+  background: transparent;
+}
+/* One continuous canvas, including the home-indicator and dock safe area. */
+.android-app:has(#mobile-app.chat-page-active),
+.android-app:has(#mobile-app.chat-page-active) body,
+.android-app #mobile-app.chat-page-active,
+#mobile-app.chat-page-active :is(#page-chat, .page-header, .page-chat-form, .app-chat-compose) {
+  background-color: #fff5f6;
+}
+#mobile-app.chat-page-active .mobile-dock { --dock-base: #fff5f6; }
+
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  #mobile-app :is(
+    .summary-card, .memo-board, .memo-item, .countdown-card, .note-card, .moment-card,
+    .profile-hero, .profile-card, .home-board, .board-question, .board-actions button,
+    .speech-bubble, .notification-item, .empty-message, .favorite-card,
+    .version-info-card, .panel-help-card, .reminder-group, .reminder-mode-card,
+    .reminder-list-group, .reminder-inline-card, .memory-field, .records-group,
+    .archive-source-card, .developer-card, .custom-time, .daily-greeting,
+    .app-guide-section, .menu-row, .memo-create-grid button, .chat-font-control,
+    .header-actions .icon-button, .header-actions .round-add, .centered-back,
+    .stepper button, .memo-board-add, .memo-check, .note-header-time,
+    .note-detail-header > button, .rich-text-toolbar button, .wheel-value-button,
+    .app-chat-examples button, .app-chat-entry textarea, .app-chat-entry > button,
+    .chat-selection-bar button, .wide-primary, .primary-action,
+    .timer-presets button, .timer-actions button, .mode-switch,
+    .daily-answer-actions button, .memo-item-action-options button,
+    .reminder-edit, .reminder-allow, .reminder-preview, .reminder-audio-picker,
+    .reminder-style-actions button, .reminder-time-edit, .archive-link-buttons a,
+    .mobile-sheet .sheet-heading > button, .mobile-sheet .switch-row,
+    .mobile-sheet .setting-row, .mobile-sheet .setting-button,
+    .chat-customizer button:not(.color-swatch), .image-cropper button,
+    .wheel-picker button, .reminder-system-help button,
+    .mobile-sheet input:not([type=checkbox]):not([type=range]),
+    .mobile-sheet select, .mobile-sheet textarea, .app-confirm button
+  ) {
+    background-color: color-mix(in srgb, var(--glass-base) 78%, transparent) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(1.04);
+    backdrop-filter: blur(16px) saturate(1.04);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 65%), 0 2px 8px rgb(103 77 82 / 3%);
+  }
+  /* A group owns one glass surface. Internal setting rows keep the same tone. */
+  #page-profile .profile-card > :is(.setting-row, .setting-button, .switch-row) {
+    background-color: transparent;
+  }
+  #mobile-app :is(.mobile-sheet, .app-confirm, .chat-customizer, .image-cropper, .wheel-picker, .reminder-system-help) {
+    background-color: color-mix(in srgb, var(--glass-base) 90%, transparent) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(1.04);
+    backdrop-filter: blur(24px) saturate(1.04);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 75%), 0 -3px 20px rgb(103 77 82 / 5%);
+  }
+  /* Chat presentation keeps the approved four-pixel corners and borderless files. */
+  #mobile-app :is(.chat-message, .archive-file-card) {
+    --glass-base: var(--chat-pet-color, #fff);
+    background-color: color-mix(in srgb, var(--glass-base) 88%, transparent) !important;
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border: 0; border-radius: 4px; box-shadow: none;
+  }
+  #mobile-app .chat-message.user { --glass-base: var(--chat-user-color, #f4c8cf); }
+  #mobile-app .chat-message.pet::before { background-color: color-mix(in srgb, var(--chat-pet-color, #fff) 88%, transparent); }
+  #mobile-app .chat-message.user::before { background-color: color-mix(in srgb, var(--chat-user-color, #f4c8cf) 88%, transparent); }
+  #mobile-app .mobile-dock {
+    background-color: color-mix(in srgb, var(--dock-base, #fffdf8) 76%, transparent);
+    border-radius: 25px;
+    border: 1px solid rgb(243 220 224 / 70%);
+    margin: 4px 18px 0;
+    padding-left: 6px; padding-right: 6px;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 70%);
+  }
+  /* The native dock already applies its own 18-pixel inset to the full-width slot. */
+  .native-glass-ready #mobile-app .mobile-dock { margin: 0; border: 0; border-radius: 0; }
+}
+#mobile-app :is(.wide-primary, .primary-action, .timer-presets .selected, .mode-switch .selected) { --glass-base: #ecaeb9; }
+#mobile-app :is(.timer-presets button:not(.selected), .timer-actions button, .mode-switch, .daily-answer-actions button, .app-confirm button) { --glass-base: #fceff1; }
+#mobile-app .mobile-sheet :is(.switch-row, .developer-card, .custom-time) { --glass-base: #fffaf8; }
+#mobile-app :is(.wheel-picker, .chat-customizer, .image-cropper, .reminder-system-help) button:not(.color-swatch) { --glass-base: #fceff1; }

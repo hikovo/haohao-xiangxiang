@@ -1,0 +1,31 @@
+#ios-floating-rabbit { position: fixed; z-index: 72; touch-action: none; pointer-events: none; }
+#ios-floating-rabbit[hidden] { display: none; }
+#ios-floating-rabbit .ios-rabbit-handle { display: block; width: 100%; border: 0; padding: 0; background: transparent; box-shadow: none; pointer-events: auto; touch-action: none; appearance: none; -webkit-appearance: none; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; user-select: none; -webkit-user-select: none; }
+#ios-floating-rabbit .ios-rabbit-handle:is(:active, :focus) { background: transparent; box-shadow: none; outline: none; }
+#ios-floating-rabbit canvas { display: block; width: 100%; height: 100%; pointer-events: none; }
+#ios-floating-rabbit .ios-rabbit-popover { position: absolute; width: min(240px, calc(100vw - 32px)); box-sizing: border-box; overflow: auto; padding: 10px; border: 1px solid #f8dfe4; border-radius: 14px; background: #fff9ef; color: #674d52; box-shadow: 0 4px 14px #674d5210; pointer-events: auto; touch-action: pan-y; }
+#ios-floating-rabbit .ios-rabbit-popover[hidden] { display: none; }
+#ios-floating-rabbit .ios-rabbit-popover p { margin: 0 0 8px; font-size: 13px; line-height: 1.4; }
+#ios-floating-rabbit .ios-rabbit-popover div { display: flex; flex-wrap: wrap; gap: 5px; }
+#ios-floating-rabbit .ios-rabbit-popover button { padding: 6px 7px; border: 0; border-radius: 8px; color: #674d52; background: #ffeaf0; font-size: 12px; white-space: nowrap; }
+#ios-floating-rabbit .ios-rabbit-handle:focus-visible { outline: 2px dashed #f4c8cf; outline-offset: 3px; border-radius: 50%; }
+
+.ios-single-rabbit #mobile-pet, .ios-single-rabbit #speech-bubble, .ios-single-rabbit #memo-companion { display: none !important; }
+
+#ios-floating-rabbit .ios-rabbit-popover { width: max-content; max-width: min(256px, calc(100vw - 32px)); overflow: visible; padding: 12px 14px; background: #fff4f7; border-color: #f0cbd6; pointer-events: none; }
+#ios-floating-rabbit .ios-rabbit-popover p { margin: 0; font-size: 14px; line-height: 1.6; text-align: center; text-wrap: balance; }
+#ios-floating-rabbit .ios-rabbit-popover::after { content: ''; position: absolute; left: var(--reply-tail, 50%); bottom: -5px; width: 8px; height: 8px; transform: translateX(-50%) rotate(45deg); background: #fff4f7; border-right: 1px solid #f0cbd6; border-bottom: 1px solid #f0cbd6; }
+#ios-floating-rabbit .ios-rabbit-popover.below-rabbit::after { top: -5px; bottom: auto; transform: translateX(-50%) rotate(225deg); }
+#ios-floating-rabbit .ios-rabbit-popover { background: rgb(255 255 255 / 84%); border: .75px solid #eecbd5; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: 0 3px 14px rgb(103 77 82 / 6%); }
+#ios-floating-rabbit .ios-rabbit-popover::after { display: none; }
+
+#ios-floating-rabbit .ios-rabbit-popover { padding: 8px 10px; border-radius: 12px; }
+
+#ios-floating-rabbit[popover] { margin:0; padding:0; border:0; background:transparent; color:inherit; right:auto; bottom:auto; overflow:visible; }
+#ios-floating-rabbit::backdrop { background:transparent; pointer-events:none; }
+
+/* A pet is artwork, including while adopted into a modal's top layer. */
+#ios-floating-rabbit { position:fixed!important; margin:0!important; padding:0!important; border:0!important; border-radius:0!important; background:transparent!important; box-shadow:none!important; filter:none!important; backdrop-filter:none!important; -webkit-backdrop-filter:none!important; max-width:none!important; max-height:none!important; overflow:visible!important; line-height:0!important; }
+#ios-floating-rabbit .ios-rabbit-handle, #ios-floating-rabbit .ios-rabbit-handle:is(:focus,:focus-visible,:active,:hover) { margin:0!important; padding:0!important; border:0!important; border-radius:0!important; background:transparent!important; background-image:none!important; box-shadow:none!important; filter:none!important; backdrop-filter:none!important; -webkit-backdrop-filter:none!important; outline:0!important; min-height:0!important; line-height:0!important; text-decoration:none!important; }
+#ios-floating-rabbit .ios-rabbit-handle::before, #ios-floating-rabbit .ios-rabbit-handle::after { content:none!important; display:none!important; }
+#ios-floating-rabbit canvas { background:transparent!important; border:0!important; box-shadow:none!important; }

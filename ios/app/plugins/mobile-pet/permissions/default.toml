@@ -1,0 +1,30 @@
+[default]
+description = "Default permissions for the plugin"
+permissions = [
+  "allow-sync-widgets",
+  "allow-speak-weather",
+  "allow-local-model",
+  "allow-ledger-store",
+  "allow-health-store",
+  "allow-timetable-store",
+  "allow-timetable-scan",
+  "allow-open-external",
+  "allow-copy-text",
+  "allow-haptic-tap",
+  "allow-start-overlay",
+  "allow-stop-overlay",
+  "allow-overlay-status",
+  "allow-daily-reminder-state",
+  "allow-save-daily-reminder",
+  "allow-mark-daily-prompt-shown",
+  "allow-answer-daily-reminder",
+  "allow-sync-memo-reminders",
+  "allow-reminder-style",
+  "allow-schedule-focus-reminder",
+  "allow-cancel-focus-reminder",
+  "allow-unified-chat",
+  "allow-unified-retract-messages",
+  "allow-unified-clear-conversation",
+  "allow-unified-memory-state",
+  "allow-unified-import-legacy"
+]

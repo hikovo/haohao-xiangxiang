@@ -1,0 +1,101 @@
+/* The approved home header is the common vertical reference. */
+#mobile-app .page-header, #mobile-app .note-detail-header {
+  box-sizing: border-box;
+  height: calc(76px + max(0px, env(safe-area-inset-top) - 18px));
+  min-height: calc(76px + max(0px, env(safe-area-inset-top) - 18px));
+  padding-top: max(18px, env(safe-area-inset-top));
+  padding-bottom: 10px;
+  margin-bottom: 0;
+  align-items: center;
+}
+#mobile-app .header-actions { align-items: center; }
+#mobile-app .page-header .header-actions > :is(.icon-button, .round-add),
+#mobile-app .note-detail-header > .centered-back {
+  width: 42px; height: 42px; min-width: 42px; min-height: 42px; flex: 0 0 42px;
+  padding: 0; border-radius: 50%;
+}
+#mobile-app .note-detail-header > :is(button, time) {
+  background: rgb(250 229 237 / 66%) !important;
+  border: 1px solid rgb(238 194 208 / 55%);
+  -webkit-backdrop-filter: blur(18px) saturate(1.08);
+  backdrop-filter: blur(18px) saturate(1.08);
+  box-shadow: inset 0 1px 1px rgb(255 255 255 / 88%), 0 2px 7px rgb(117 78 91 / 6%);
+  height: 42px; min-height: 42px;
+}
+#mobile-app .note-detail-header > strong { font-size: clamp(18px, 5vw, 23px); line-height: 1.2; }
+#mobile-app .note-detail-header > :is(time, button[data-picker-for]) { font-size: 12px; padding: 0 8px; }
+#mobile-app :is(#note-detail-view, #moment-detail-view) .note-detail-header > :is(button, time, input) {
+  background: rgb(255 241 244 / 78%) !important;
+  font-size: 14px;
+  font-weight: 500;
+  color: #8b6d75;
+  line-height: 1;
+  border-radius: 999px !important;
+  height: 42px; min-height: 42px;
+  border: 1px solid rgb(238 213 222 / 58%);
+}
+#mobile-app :is(#note-detail-view, #moment-detail-view) .note-detail-header > :is(time, button[data-picker-for]) { padding: 0 10px; }
+#mobile-app .ledger-page { padding-top: max(0px, calc(env(safe-area-inset-top) - 18px)); }
+.phone > .head { box-sizing: border-box; height: 76px; min-height: 76px; padding: 18px 18px 10px; gap: 10px; align-items: center; }
+.phone > .head h1 { font-size: 23px; line-height: 1.2; }
+.phone > .head :is(.orb, .icon) { width: 42px; height: 42px; min-width: 42px; padding: 0; border-radius: 50%; flex: 0 0 42px; -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); box-shadow: inset 0 1px 1px rgb(255 255 255 / 88%), 0 2px 7px rgb(117 78 91 / 6%); }
+.phone > .content { height: calc(100% - 76px); }
+#mobile-app .centered-back::before { content: none; }
+#mobile-app .centered-back .header-icon, .phone .head .header-icon { display: block; width: 23px; height: 23px; object-fit: contain; }
+#mobile-app .note-detail-header > .centered-back { display: grid; place-items: center; }
+#mobile-app .archive-reader-header .centered-back { width: 42px; height: 42px; min-width: 42px; flex:0 0 42px; }
+/* Every secondary sheet uses the same heading row and first-content gap. */
+#mobile-app .mobile-sheet { padding-left: 18px; padding-right: 18px; }
+#mobile-app .mobile-sheet .sheet-heading { height: 42px; min-height: 42px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0; margin: 0 0 14px; }
+#mobile-app .mobile-sheet .sheet-heading h2 { margin: 0; line-height: 1.3; font-size: 21px; text-align: left; }
+#mobile-app .mobile-sheet .sheet-heading > button { margin: 0 0 0 auto; }
+#mobile-app .mobile-sheet .sheet-body { padding-top: 0; margin-top: 0; }
+#mobile-app .mobile-sheet .sheet-body > :first-child { margin-top: 0 !important; }
+#mobile-app .mobile-sheet .sheet-body > :nth-child(1 of :not([hidden])) { margin-top: 0 !important; }
+#mobile-app .mobile-sheet .sheet-body > :is(.memo-create-grid, .memo-item-action-options) { padding-top: 0; }
+#mobile-app .mobile-sheet .sheet-body > :is(.settings-group, .reminder-list-group, .records-group):first-child { margin-top: 0; }
+.phone .sheet { padding-left: 18px; padding-right: 18px; }
+.phone .sheet-head { height: 42px; min-height: 42px; margin: 0 0 14px; gap: 12px; align-items: center; }
+.phone .sheet-head h2 { margin: 0; line-height: 1.3; font-size: 21px; }
+.phone .sheet-head > .close { margin-left: auto; }
+.phone :is(.sheet-head + *, #form > :first-child) { margin-top: 0; }
+
+#mobile-app :is(#note-detail-view, #moment-detail-view) .note-detail-header > .centered-back { width:42px; flex:0 0 42px; }
+#mobile-app :is(#note-detail-view, #moment-detail-view) .note-detail-header > button:nth-child(2) { width:56px; flex:0 0 56px; padding:0 10px; }
+#mobile-app :is(#note-detail-view, #moment-detail-view) .note-detail-header > strong { font-size:19px; }
+
+#mobile-app #countdown-photo-picker { margin-bottom:0; }
+#mobile-app #countdown-editor-panel:has(#countdown-photo-picker:not([hidden])) #save-countdown { margin-top:16px; }
+/* All selection arrows face right, including the standalone companion pages. */
+.phone select { appearance:none; -webkit-appearance:none; padding-right:34px!important; background-image:url('/header-forward.svg')!important; background-size:18px 18px!important; background-repeat:no-repeat!important; background-position:right 10px center!important; }
+.phone .entry i, .phone .agenda-entry>i, #mobile-app .setting-button>i:not(.overlay-switch) { display:block; flex:0 0 18px; width:18px; height:18px; color:transparent; font-size:0; background:url('/header-forward.svg') center/18px 18px no-repeat; }
+.phone .head :is(.orb,.icon), #mobile-app .note-detail-header>.centered-back { background:rgb(255 241 244 /78%)!important; border:1px solid rgb(238 213 222 /58%); }
+
+#mobile-app #memo-open-ledger { background:rgb(255 241 244 /78%)!important; }
+#mobile-app :is(.centered-back, .archive-back) { width:42px; height:42px; min-width:42px; border-radius:50%!important; background:rgb(255 241 244 /78%)!important; border:1px solid rgb(238 213 222 /58%); -webkit-backdrop-filter:blur(18px); backdrop-filter:blur(18px); }
+
+#mobile-app summary, .phone summary { list-style:none; display:flex; align-items:center; justify-content:space-between; gap:10px; }
+#mobile-app summary::-webkit-details-marker, .phone summary::-webkit-details-marker { display:none; }
+#mobile-app summary::marker, .phone summary::marker { content:''; }
+#mobile-app summary::after, .phone summary::after { content:''; flex:0 0 18px; width:18px; height:18px; background:url('/header-forward.svg') center/18px 18px no-repeat; }
+.phone .month button { display:flex; align-items:center; gap:6px; }
+.phone .month button::after { content:''; display:block; width:18px; height:18px; background:url('/header-forward.svg') center/18px 18px no-repeat; }
+.phone > .head, .phone > footer { z-index:3; }
+.phone > .head { position:relative; }
+.phone .sheet-head { position:relative; z-index:3; }
+.phone :is(input,select,textarea):focus { outline:none!important; outline-offset:0!important; border-color:#c798a8!important; box-shadow:inset 0 0 0 1px #c798a8!important; }
+.phone button:focus-visible { outline:none!important; outline-offset:0!important; box-shadow:inset 0 0 0 2px #c798a8!important; }
+
+/* Shared app picker values replace native controls inside companion frames. */
+.phone .wheel-native-input { position:absolute!important; width:1px!important; min-width:0!important; max-width:1px!important; height:1px!important; padding:0!important; margin:0!important; opacity:0; pointer-events:none; }
+.phone .wheel-value-button { display:flex; align-items:center; justify-content:space-between; gap:6px; width:100%; min-width:0; max-width:100%; height:44px; box-sizing:border-box; margin-top:6px; padding:10px; border:1px solid #eeded3; border-radius:12px; background:rgb(255 253 248 /66%); color:#846761; font-family:inherit; font-size:14px; line-height:1.3; text-align:left; }
+.phone .wheel-value-button > span { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.phone .wheel-right-arrow { display:block; flex:0 0 18px; width:18px; height:18px; background:url('/header-forward.svg') center/18px 18px no-repeat; }
+
+/* iOS/WebKit owns date, calendar, time and month selection. */
+:is(#mobile-app,.phone) .system-date-control { position:relative; display:flex; align-items:center; justify-content:space-between; overflow:hidden; isolation:isolate; cursor:pointer; box-sizing:border-box; }
+:is(#mobile-app,.phone) .system-date-control>input.system-date-input { position:absolute!important; inset:0!important; display:block!important; width:100%!important; min-width:0!important; max-width:100%!important; height:100%!important; min-height:0!important; margin:0!important; padding:0!important; opacity:0!important; pointer-events:auto!important; cursor:pointer; z-index:2; border:0!important; }
+:is(#mobile-app,.phone) .system-date-control>span { pointer-events:none; min-width:0; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
+:is(#mobile-app,.phone) .system-date-control>i { pointer-events:none; }
+:is(#mobile-app,.phone) .system-date-control.disabled { opacity:.5; cursor:default; }
+.phone .week-control label>.system-date-control { position:absolute; inset:0; width:100%; height:100%; opacity:0; margin:0; padding:0; }

@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-timetable-store"
+description = "Enables the timetable_store command without any pre-configured scope."
+commands.allow = ["timetable_store"]
+
+[[permission]]
+identifier = "deny-timetable-store"
+description = "Denies the timetable_store command without any pre-configured scope."
+commands.deny = ["timetable_store"]

@@ -1,0 +1,187 @@
+/* iOS visual system: readable type, content-sized sheets and mini-program colors in a separate stylesheet.
+   This stylesheet is loaded last; the approved artwork and reader header remain intact. */
+#mobile-app {
+  --chat-font-size: 16px;
+  --chat-gap: 9px;
+  font-size: 16px;
+}
+/* Pointer taps must not acquire Safari's blue outline. Keep an explicit, soft
+   focus indicator for keyboard navigation; text editing keeps its caret. */
+#mobile-app :is(button, a, input, textarea, select, [role=button], [contenteditable]) {
+  -webkit-tap-highlight-color: transparent;
+}
+#mobile-app :is(button, a, [role=button]):focus { outline: none; }
+#mobile-app :is(button, a, [role=button]):focus-visible {
+  outline: 2px solid #d8a2b2; outline-offset: 2px;
+}
+#mobile-app :is(input, textarea, select, [contenteditable]):focus {
+  outline: none;
+}
+#mobile-app :is(input, textarea, select, [contenteditable]):focus-visible {
+  outline: 2px solid #dfb4bf; outline-offset: 1px;
+}
+.page-header { gap: 10px; }
+.header-actions { gap: 8px; }
+.header-actions > :is(.icon-button, .round-add) {
+  width: 40px; height: 40px; min-width: 40px;
+  box-shadow: 0 2px 0 rgb(151 112 110 / 4%);
+}
+.mobile-dock { backdrop-filter: blur(20px) saturate(1.12); -webkit-backdrop-filter: blur(20px) saturate(1.12); }
+/* Reserve the web dock's space while UIKit draws the material and handles navigation.
+   Hide only after the native view and all four original icons are ready. */
+.native-glass-ready .mobile-dock { visibility: hidden; }
+/* Move the whole fixed profile header below the island, including both ears. */
+#page-profile .profile-fixed-top { padding-top: calc(env(safe-area-inset-top) + 8px); }
+#page-profile .profile-scroll-content, #page-memo .memo-dashboard { padding-bottom: 12px; }
+#page-profile .profile-scroll-content > :last-child,
+#page-memo .memo-dashboard > :last-child { margin-bottom: 0; }
+#mobile-app :is(input:not([type=checkbox]):not([type=range]), textarea, select) { font-size: 16px; }
+#mobile-app :is(.setting-row, .setting-button, .switch-row) { min-height: 52px; box-sizing: border-box; padding: 10px 12px; }
+#mobile-app :is(.setting-row, .setting-button, .switch-row) b { font-size: 15px; line-height: 1.45; }
+#mobile-app :is(.setting-row, .setting-button, .switch-row) small { font-size: 13px; line-height: 1.5; }
+#mobile-app :is(.setting-row, .setting-button) em { font-size: 14px; }
+#mobile-app .settings-group { margin-bottom: 14px; }
+#mobile-app .settings-group h2 { font-size: 16px; margin-bottom: 7px; }
+.mobile-dock button { padding-bottom: 5px; min-height: 60px; }
+
+/* Textarea grows to three lines, with Return always producing a newline. */
+.app-chat-entry { align-items: end; gap: 8px; }
+.app-chat-entry textarea {
+  display: block; width: 100%; min-width: 0; height: 44px; min-height: 44px; max-height: 108px;
+  box-sizing: border-box; resize: none; overflow-y: hidden;
+  padding: 10px 12px; border: 1px solid #ead7d9; border-radius: 15px;
+  outline: none;
+  font-family: inherit; font-size: 16px; line-height: 22px;
+}
+.app-chat-entry > button { min-height: 44px; height: 44px; border-radius: 15px; font-size: 15px; }
+.app-chat-examples { gap: 6px; padding: 5px 0 7px; }
+.app-chat-examples button { font-size: 13px; padding: 6px 10px; }
+#page-chat .chat-avatar { border-radius: 4px; }
+#page-chat .chat-line { align-items: flex-start; }
+#page-chat .chat-message { line-height: 1.55; white-space: pre-wrap; }
+#page-chat .archive-file-card { min-height: 72px; padding: 10px 12px; border-radius: 4px; border: 0; box-shadow: none; }
+#page-chat .archive-file-card strong { font-size: 15px; line-height: 1.45; }
+#page-chat .archive-file-card small { font-size: 13px; margin-top: 3px; }
+#page-chat .archive-file-card > img { width: 48px; height: 48px; flex-basis: 48px; }
+
+/* Editors share the same pill size and comfortable date type. */
+.note-detail-header { gap: 8px; }
+.note-detail-header > button:nth-child(2) { height: 42px; min-width: 52px; border-radius: 16px; font-size: 15px; }
+.note-header-time {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 42px; padding: 0 10px; border-radius: 16px; font-size: 15px; font-weight: 500;
+}
+.moment-header-date.wheel-value-button[data-picker-for='moment-date-input'] {
+  flex: 0 1 auto; min-width: 0; height: 42px; min-height: 42px;
+  margin-left: auto; padding: 0 10px; gap: 5px;
+  border: 0; border-radius: 16px;
+  font-size: 15px; font-weight: 500;
+}
+#mobile-app .note-title-input { padding: 12px 4px 10px; font-size: 22px; }
+.rich-text-toolbar { gap: 6px; padding: 8px 0; }
+.rich-text-toolbar button { padding: 6px 9px; font-size: 13px; border-radius: 10px; }
+.note-body-input { font-size: 16px; line-height: 1.75; padding: 12px 4px; }
+.note-detail-footer button { font-size: 13px; }
+
+/* Grid containers pack their rows at the start rather than stretching gaps. */
+.memo-dashboard, .notification-list { align-content: start; }
+#page-memo .memo-dashboard { gap: 10px; margin-top: 10px; }
+#page-memo .summary-card { min-height: 90px; padding: 12px 14px; border-radius: 19px; }
+#page-memo .summary-card strong { font-size: 19px; margin: 5px 0 3px; }
+#page-memo .summary-card :is(span, small) { font-size: 14px; line-height: 1.45; }
+.memo-board { padding: 12px; border-radius: 20px; box-shadow: none; }
+.memo-board-heading { min-height: 30px; margin-bottom: 8px; }
+.memo-board-heading h2 { font-size: 17px; }
+.memo-board-heading h2 span { font-size: 13px; }
+#page-memo :is(.memo-item, .countdown-card, .note-card, .moment-card) { height: auto; min-height: 64px; padding: 9px 10px; }
+#page-memo :is(.memo-copy, .countdown-copy, .note-card, .moment-card) b { font-size: 15px; line-height: 1.4; }
+#page-memo :is(.memo-copy, .countdown-card, .note-card, .moment-card) small { font-size: 13px; }
+.note-card-first-line i { font-size: 13px; }
+#mobile-app .empty-message { font-size: 14px; line-height: 1.6; padding: 10px; margin: 4px 0; }
+
+/* Compact content-sized sheets, with consistent labels and controls. */
+.mobile-sheet {
+  height: auto; min-height: 0; padding: 16px 18px max(16px, env(safe-area-inset-bottom));
+  border-radius: 25px 25px 0 0;
+}
+.mobile-sheet .sheet-heading { margin-bottom: 10px; min-height: 34px; }
+.mobile-sheet .sheet-heading h2 { font-size: 20px; line-height: 1.4; }
+.mobile-sheet .sheet-handle { width: 34px; margin: -6px auto 8px; }
+.mobile-sheet .sheet-body { flex: 0 1 auto; }
+.mobile-sheet .sheet-ending { font-size: 13px; line-height: 1.5; margin-top: 8px; }
+.mobile-sheet .field-label { font-size: 14px; line-height: 1.4; gap: 5px; margin: 8px 0; }
+.mobile-sheet .field-label:first-child { margin-top: 0; }
+.mobile-sheet .field-label :is(input:not([type=checkbox]), select, .wheel-value-button) {
+  min-height: 44px; height: 44px; padding: 0 12px; border-radius: 13px; font-size: 16px; line-height: 1.4;
+}
+.mobile-sheet .wide-primary { min-height: 46px; font-size: 16px; font-weight: 600; }
+.mobile-sheet .switch-row { min-height: 48px; margin: 8px 0; padding: 10px 12px; border-radius: 14px; }
+.mobile-sheet .switch-row input { width: 22px; height: 22px; }
+.mobile-sheet .guide-content :is(li, .guide-paragraph) { font-size: 15px; line-height: 1.7; }
+.mobile-sheet :is(.sheet-note, .reminder-intro, .reminder-system-hint) { font-size: 13px; line-height: 1.6; }
+.mobile-sheet .reminder-inline-card { margin: 8px 0; padding: 10px 12px; }
+.mobile-sheet .reminder-inline-card small { font-size: 14px; }
+#memo-reminder-options { gap: 8px 10px; }
+#memo-reminder-options .field-label { margin: 0; grid-template-rows: auto 44px; font-size: 14px; }
+#memo-reminder-options :is(select, .reminder-inline-card) { height: 44px; min-height: 44px; margin: 0; padding: 0 10px; }
+#memo-reminder-options .reminder-inline-card small { font-size: 14px; }
+#memo-editor-panel #save-memo { margin-top: 10px; }
+#notification-list { display: flex; flex-direction: column; gap: 6px; }
+#notification-list h3 { display: flex; align-items: center; gap: 7px; font-size: 14px; margin: 8px 0 2px; line-height: 1.4; }
+#notification-list h3:first-child { margin-top: 0; }
+#notification-list h3::before { content: '♡'; display: grid; place-items: center; width: 23px; height: 23px; border-radius: 8px; font-size: 14px; }
+#notification-list h3:nth-of-type(2)::before { content: '✓'; }
+#notification-list .notification-item { margin: 0; padding: 10px 12px; gap: 3px; min-height: 62px; border-radius: 14px; }
+#notification-list .notification-item b { font-size: 16px; line-height: 1.4; }
+#notification-list .notification-item small { font-size: 14px; line-height: 1.4; margin: 0; }
+#notification-list .empty-message { text-align: left; padding: 10px 12px; margin: 0; border-radius: 13px; font-size: 14px; }
+
+/* Scroll edges are rendered by UIKit, without a CSS content mask or colored film. */
+/* Companion settings retain the approved pale surfaces. */
+.meal-result {padding:14px 16px; margin:0 0 12px; background:#fff5f8; color:#775c62; border-radius:16px; font-size:16px; line-height:1.5}
+.meal-add-row {display:flex; gap:8px; align-items:center}
+.meal-add-row input {min-width:0; flex:1}
+.meal-add-row button {padding:10px 14px; border-radius:12px; background:#f9e3eb; border:1px solid #f1d6df; color:#775c62; font-size:15px}
+.meal-options {display:flex; flex-wrap:wrap; gap:8px; margin:12px 0}
+.meal-chip {display:inline-flex; align-items:center; gap:6px; padding:7px 10px; border-radius:12px; background:#fff8ed; border:1px solid #f1e4d3; font-size:14px; color:#775c62}
+.meal-chip button {width:24px; height:24px; padding:0; background:transparent; color:#b88491; border:0; font-size:19px}
+.companion-settings-help {font-size:13px; line-height:1.7; color:#a3868b; margin:12px 0}
+.weather-credit {display:flex; align-items:center; gap:8px; font-size:12px; color:#9e7882; margin-top:12px}
+.weather-credit img {width:90px; height:18px; object-fit:contain}
+
+/* Secondary information is readable without turning it into a large card.
+   These scoped rules cover the less frequently opened pages as well. */
+#mobile-app :is(.menu-row small, .profile-hero small, .contact-links small,
+  .rabbit-memory-content small, .chat-favorite-card .favorite-heading,
+  .note-card-copy i, .moment-card-copy small, .countdown-photo-picker small,
+  .records-row small, .records-group p, .reader-hint, .reminder-system-hint,
+  .reminder-management-row small.reminder-entry-time, .opacity-captions) {
+  font-size: 13px; line-height: 1.5;
+}
+#mobile-app :is(.menu-link, .timer-presets button, .timer-actions button,
+  .memo-board-add, .memo-create-grid b, .reminder-time-edit,
+  .records-row button, .contact-links i, .chat-favorite-card .favorite-remove,
+  .note-media-remove, .cropper-ratios button) { font-size: 14px; }
+#mobile-app :is(.rabbit-memory-form label, .archive-date, .letter-reader-date,
+  .countdown-card small, .note-card-copy small, .rich-text-editor table) {
+  font-size: 14px; line-height: 1.5;
+}
+#mobile-app .rabbit-memory-form { gap: 8px; }
+#mobile-app .rabbit-memory-form label { gap: 4px; }
+#mobile-app .mobile-sheet .sheet-eyebrow { font-size: 13px; margin-bottom: 3px; }
+#mobile-app .mobile-sheet .sheet-note { margin: 8px 0; }
+#mobile-app .mobile-sheet .chat-favorites-empty { padding: 16px 8px; }
+#mobile-app .mobile-sheet .notification-list { margin: 0; }
+#page-home .home-board { width: min(66vw, 260px); }
+#page-home .board-heading span, #page-home .board-question span { font-size: 14px; }
+#page-home .board-heading small, #page-home .board-question strong { font-size: 12px; }
+#page-home .board-actions button { min-height: 34px; font-size: 13px; }
+
+/* Decorative artwork should not open WebKit's image preview on a held tap. */
+#mobile-app :is(.page-brand-logo, .page-brand-title, .profile-rabbit-head,
+  .profile-background, .tab-icon),
+#mobile-app :is(button, [role="button"]) :is(img, svg, canvas) {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}

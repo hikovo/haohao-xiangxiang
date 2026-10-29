@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-reminder-style"
+description = "Enables the reminder_style command without any pre-configured scope."
+commands.allow = ["reminder_style"]
+
+[[permission]]
+identifier = "deny-reminder-style"
+description = "Denies the reminder_style command without any pre-configured scope."
+commands.deny = ["reminder_style"]

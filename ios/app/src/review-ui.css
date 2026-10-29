@@ -1,0 +1,274 @@
+/* 2026-10-11 numbered review. Warm paper remains light; controls have a
+   visible blush tone instead of inheriting the almost-white glass default. */
+#mobile-app { --review-pink: #f4c8d2; --review-pink-soft: #f9dfe6; --review-pink-pale: #fceaf0; }
+#mobile-app :is(.wide-primary, .primary-action, .app-chat-entry > button,
+ .timer-presets .selected, .mode-switch .selected, .daily-answer-actions .wide-primary,
+ .reminder-style-actions .wide-primary, .app-confirm [data-confirm-accept],
+ .image-cropper [data-crop=confirm], .reminder-system-help [data-dismiss]) { --glass-base: #efb4c2; color: #674d52; }
+#mobile-app :is(.mobile-sheet .sheet-heading > button, .centered-back,
+ .memo-board-add, .timer-presets button:not(.selected), .timer-actions button,
+ .daily-answer-actions button, .app-confirm button, .cropper-actions button,
+ .reminder-style-actions button, .reminder-preview, .reminder-audio-picker,
+ .records-row button, .meal-add-row button, .note-detail-header > button,
+ .note-header-time, .wheel-picker button, .reminder-system-help button) { --glass-base: #f4c8d2; }
+#mobile-app #notification-list :is(.notification-item, .empty-message) { --glass-base: #fffdf8; border-color: #efe4d1; }
+#mobile-app #chat-record-panel .setting-button { --glass-base: #fff0f4; }
+#mobile-app #chat-actions-panel .setting-button { --glass-base: #fff3f6; }
+#mobile-app #chat-actions-panel .sheet-body { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+#mobile-app #chat-actions-panel .setting-button { display: flex; box-sizing: border-box; margin: 0; height: 66px; min-height: 66px; padding: 10px 12px; border: 1px solid #f1dce1; border-radius: 16px; }
+#mobile-app #chat-actions-panel .setting-button b { font-size: 16px; line-height: 1.4; }
+#mobile-app #chat-actions-panel .setting-button small { display: block; margin-top: 3px; font-size: 13px; line-height: 1.4; }
+#mobile-app #chat-actions-panel .setting-button i { display: none; }
+#mobile-app #chat-appearance-panel .setting-button { --glass-base: #fff9ef; }
+#mobile-app .memo-item-action-options button { --glass-base: #fce9ef; font-size: 17px; }
+#mobile-app .memo-item-action-options button.danger { --glass-base: #f6d4df; color: #874454; }
+#mobile-app #developer-contact-panel .developer-card { --glass-base: #fce5eb; }
+#mobile-app #daily-answer-panel .daily-greeting { --glass-base: #fff9ef; border-color: #efe2cc; }
+#mobile-app #daily-answer-panel .daily-answer-actions button:not(.wide-primary) { --glass-base: #fce9ef; }
+/* Glass opacity is higher on buttons than paper cards, to retain their color. */
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+ #mobile-app :is(.wide-primary, .primary-action, .timer-presets button, .timer-actions button,
+ .daily-answer-actions button, .app-confirm button, .cropper-actions button,
+ .reminder-style-actions button, .reminder-preview, .reminder-audio-picker,
+ .records-row button, .meal-add-row button, .memo-board-add, .note-detail-header > button,
+ .note-header-time, .reminder-system-help button, .chat-selection-bar button) {
+  background-color: color-mix(in srgb, var(--glass-base) 94%, transparent) !important;
+ }
+}
+/* Selection replaces the composer in the same slot. */
+#page-chat.chat-selecting .app-chat-examples { display: none !important; }
+#page-chat.chat-selecting .app-chat-entry { display: none !important; }
+#page-chat.chat-selecting .chat-line.selected .chat-message { outline: none; filter: drop-shadow(1px 0 0 #edb6c3) drop-shadow(-1px 0 0 #edb6c3) drop-shadow(0 1px 0 #edb6c3) drop-shadow(0 -1px 0 #edb6c3); }
+#page-chat .chat-selection-bar { margin: 0; padding: 0; gap: 8px; height: 44px; border: 0; border-radius: 0; background: transparent; box-shadow: none; grid-template-columns: 64px minmax(0, 1fr) 64px; }
+#page-chat .chat-selection-bar strong { display: grid; place-items: center; height: 44px; font-size: 16px; line-height: 1; }
+#page-chat .chat-selection-bar button { --glass-base: #f7d6df; box-sizing: border-box; width: 64px; height: 44px; min-height: 44px; padding: 0; display: grid; place-items: center; font-family: inherit; font-size: 15px; line-height: 1; border-radius: 15px; }
+#page-chat .app-chat-entry > button { box-sizing: border-box; width: 64px; height: 44px; padding: 0; }
+#mobile-app #timer-panel .timer-presets button:not(.selected) { --glass-base: #fcecf1; background: #fcecf1 !important; }
+#mobile-app #timer-panel .timer-presets button.selected { --glass-base: #efb4c2; background: #efb4c2 !important; }
+/* Wallpaper ends before the composer, with a small, consistent breathing gap. */
+#mobile-app #page-chat .page-chat-log { margin: 0 -18px 10px; padding: 12px 18px; mask-image: none; -webkit-mask-image: none; }
+#mobile-app #page-chat .page-chat-form { margin: 0; padding: 0 0 2px; }
+#mobile-app #page-chat .app-chat-compose { gap: 0; }
+#mobile-app.chat-page-active:not(.sheet-open) .browser-scroll-blur { display: none !important; }
+#mobile-app #chat-input:focus, #mobile-app #chat-input:focus-visible { outline: none !important; box-shadow: none !important; }
+#page-chat .chat-selection-bar button:disabled { opacity: .7; }
+#page-memo .memo-check { display: grid; place-items: center; line-height: 1; }
+#page-memo .memo-check svg { display: block; width: 14px; height: 14px; }
+/* A text editor's caret is its focus indicator, without an enclosing pink box. */
+#mobile-app :is(.note-title-input, .note-body-input, .moment-body-input):focus-visible { outline: none; box-shadow: none; }
+#mobile-app .note-title-input { font-size: 24px; padding: 12px 4px 12px; }
+#mobile-app .note-body-input { padding-top: 14px; }
+/* Same optical icon weight in empty and populated notebooks. */
+#page-memo :is(.note-card-mark, .moment-card-mark) img { width: 32px; height: 32px; object-fit: contain; }
+#page-memo .moment-card-mark img { width: 30px; height: 30px; }
+#page-memo :is(#note-empty, #moment-empty) > span { width: 40px; height: 40px; border-radius: 12px; }
+#page-memo :is(#note-empty, #moment-empty) img { width: 30px; height: 30px; object-fit: contain; }
+#page-memo #moment-empty img { width: 28px; height: 28px; }
+/* Center the visible artwork, including transparent padding in the original PNGs. */
+#page-memo .memo-empty-compact > span { box-sizing: border-box; padding: 0; line-height: 1; }
+#page-memo .memo-empty-compact img { display: block; }
+#page-memo .note-card-mark img { transform: translateY(4.5%); }
+#page-memo .moment-card-mark img { transform: translate(-5.5%, -2.5%); }
+#page-memo .memo-empty-compact svg { display: block; width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+#page-memo :is(#memo-empty, #anniversary-empty, #note-empty, #moment-empty) > span { width: 40px; height: 40px; flex: 0 0 40px; display: grid; place-items: center; border-radius: 12px; }
+#page-memo .memo-empty-compact .empty-art { width: 28px; height: 28px; stroke: none; }
+#page-memo .memo-item { grid-template-columns: auto minmax(0, 1fr) 32px; }
+#page-memo .memo-copy { min-width: 0; }
+#page-memo .memo-edit { width: 32px; height: 32px; min-height: 32px; }
+#mobile-app #page-memo .memo-edit { border: 0; border-radius: 0; background: transparent !important; box-shadow: none !important; -webkit-backdrop-filter: none !important; backdrop-filter: none !important; display: grid; place-items: center; padding: 0; color: #af8791; }
+#mobile-app #page-memo .memo-edit svg { width: 16px; height: 16px; }
+/* Form rhythm: a new sub-section needs room above its label, not below it. */
+#reminder-style-panel .reminder-choice { margin: 14px 0 18px; padding: 0 2px; gap: 14px; }
+#reminder-style-panel .reminder-choice .field-label { margin: 0; gap: 8px; }
+#reminder-style-panel .reminder-mode-card { padding: 10px; }
+#reminder-style-panel .reminder-mode-card > .switch-row { margin: 0; }
+#reminder-style-panel .reminder-preview { margin: 14px 0 12px; min-height: 44px; }
+#reminder-style-panel .reminder-style-actions { margin-top: 0; gap: 10px; }
+#reminder-style-panel .sheet-body { padding-bottom: 4px; }
+#mobile-app .mobile-sheet .sheet-ending { margin-top: 12px; text-align: center; text-wrap: balance; }
+#mobile-app :is(.app-confirm p, .memo-item-delete-confirm p, .mobile-toast,
+ .reminder-system-help p, .reminder-system-help small) { text-align: center; text-wrap: balance; }
+#mobile-app .app-confirm { box-sizing: border-box; width: min(356px, calc(100vw - 28px)); padding: 22px 18px; }
+#mobile-app .app-confirm p { font-size: 16px; line-height: 1.65; white-space: pre-line; margin: 0 0 18px; }
+#mobile-app .app-confirm > div { gap: 10px; }
+#mobile-app .app-confirm button { min-height: 44px; padding: 10px; font-size: 16px; }
+#mobile-app .mobile-toast { position: absolute; top: 50%; bottom: auto; left: 50%; width: max-content; min-width: 0; max-width: min(280px, calc(100% - 40px)); box-sizing: border-box; transform: translate(-50%, -50%); padding: 8px 10px; border: 1px solid rgb(255 255 255 / 14%); border-radius: 12px; background: rgb(28 25 27 / 70%); color: #fff; font-size: 14px; line-height: 1.5; text-align: center; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 4px 16px rgb(0 0 0 / 10%); pointer-events: none; }
+/* Clear, compact record rows with readable labels and equal action columns. */
+#mobile-app #records-panel .records-group { padding: 12px; margin: 0 0 10px; }
+#mobile-app #records-panel .records-group h3 { margin: 0 0 5px; font-size: 16px; line-height: 1.4; }
+#mobile-app #records-panel .records-row { display: grid; grid-template-columns: minmax(0, 1fr) auto 56px; gap: 8px; min-height: 38px; }
+#mobile-app #records-panel .records-row b { font-size: 15px; line-height: 1.35; font-weight: 500; }
+#mobile-app #records-panel .records-row small { font-size: 14px; line-height: 1.35; font-variant-numeric: tabular-nums; }
+#mobile-app #records-panel .records-row button { box-sizing: border-box; width: 56px; min-height: 34px; padding: 5px 8px; font-size: 14px; line-height: 1.35; }
+#mobile-app #records-panel .records-group p { margin: 4px 0 0; font-size: 14px; line-height: 1.5; }
+/* Photo actions and editor controls share readable glass surfaces. */
+#mobile-app .chat-customizer :is([data-custom=image], footer button) { --glass-base: #f5d2dd; font: inherit; font-size: 17px; min-height: 44px; }
+#mobile-app .image-cropper { --glass-base: #fffdf8; }
+#mobile-app .image-cropper :is(.cropper-actions button, .cropper-ratios button) { font: inherit; font-size: 16px; }
+#mobile-app :is(.mobile-sheet .sheet-heading > button, .cropper-heading button) { --glass-base: #f7d6df; box-sizing: border-box; width: 40px; height: 40px; min-height: 40px; flex: 0 0 40px; display: grid; place-items: center; padding: 0; font-size: 28px; line-height: 1; }
+#mobile-app .mobile-sheet .sheet-heading > button svg { width: 22px; height: 22px; }
+#mobile-app .note-detail-header > :is(button, .note-header-time) { box-sizing: border-box; height: 42px; min-height: 42px; display: flex; align-items: center; justify-content: center; --glass-base: #f7d6df; font-size: 16px; line-height: 1; }
+#mobile-app .note-detail-header > .centered-back { width: 42px; flex: 0 0 42px; padding: 0; }
+#mobile-app .note-detail-header > button[data-picker-for] { height: 42px; min-height: 42px; }
+#mobile-app .note-header-time { padding: 0 10px; }
+#mobile-app .cropper-zoom input { appearance: none; -webkit-appearance: none; height: 28px; background: transparent; }
+#mobile-app .cropper-zoom input::-webkit-slider-runnable-track { height: 7px; border-radius: 8px; background: #f8dce5; }
+#mobile-app .cropper-zoom input::-webkit-slider-thumb { appearance: none; -webkit-appearance: none; width: 22px; height: 22px; margin-top: -7.5px; border: 1px solid #edb9c8; border-radius: 50%; background: #efb5c6; }
+#mobile-app .cropper-zoom input::-moz-range-track { height: 7px; border: 0; border-radius: 8px; background: #f8dce5; }
+#mobile-app .cropper-zoom input::-moz-range-thumb { width: 22px; height: 22px; border: 1px solid #edb9c8; border-radius: 50%; background: #efb5c6; }
+/* Wheel choices float over one pale highlight; unselected rows are clear. */
+#mobile-app .wheel-picker .wheel-column button { --glass-base: transparent; background: transparent !important; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
+#mobile-app .wheel-picker .wheel-track::after { background: rgb(252 233 239 / 75%); }
+#mobile-app .reminder-system-help { text-align: center; }
+#mobile-app .reminder-system-help h2 { font-size: 20px; }
+#mobile-app .reminder-system-help-actions { grid-template-columns: 1fr; margin: 16px 0 12px; }
+#mobile-app .reminder-system-help [data-dismiss] { width: 100%; min-height: 44px; }
+/* Crop boundary and output use the same ratio; rounded framing is cosmetic. */
+#mobile-app .image-cropper { box-sizing: border-box; max-height: calc(100dvh - 32px); overflow-y: auto; }
+#mobile-app .cropper-viewport { box-sizing: content-box; border-width: 0; border-radius: 12px; }
+#mobile-app .image-cropper.keepsake .cropper-viewport { aspect-ratio: 1; }
+/* Guide headings align; only the two actual drive cards own a background. */
+#mobile-app #user-guide-panel[data-guide-kind='blindbox'] .app-guide-section {
+ --glass-base: transparent; background: transparent !important; backdrop-filter: none; -webkit-backdrop-filter: none;
+ box-shadow: none; padding: 0 0 16px; border: 0; border-bottom: 1px solid #f0e3e2; border-radius: 0;
+}
+/* Scrollers extend under the floating navigation. End padding lets the last
+   record stop above it; the screen beneath stays the same paper color. */
+#mobile-app { --dock-slot: calc(76px + max(8px, env(safe-area-inset-bottom))); --content-end-gap: 8px; grid-template-rows: minmax(0, 1fr); }
+#mobile-app .mobile-dock {
+ position: absolute; left: 0; right: 0; bottom: 0; z-index: 10;
+ height: calc(72px + max(8px, env(safe-area-inset-bottom))); box-sizing: border-box;
+}
+#page-memo .memo-dashboard,
+#page-profile .profile-scroll-content { padding-bottom: calc(var(--dock-slot) + var(--content-end-gap)); }
+/* One fixed navigation slot on all four pages, independent of content height. */
+#mobile-app .mobile-dock { flex-shrink: 0; box-sizing: border-box; height: calc(76px + max(8px, env(safe-area-inset-bottom))); min-height: calc(76px + max(8px, env(safe-area-inset-bottom))); padding: 5px 6px max(8px, env(safe-area-inset-bottom)); align-items: start; }
+#mobile-app .mobile-dock button { box-sizing: border-box; height: 66px; min-height: 66px; align-content: center; }
+#mobile-app:has(:is(#page-memo.active, #page-profile.active)) .mobile-dock { height: calc(76px + max(8px, env(safe-area-inset-bottom))); }
+/* Page-owned backdrop blur uses the same stack in WKWebView and the browser. */
+#mobile-app :is(.app-page, .mobile-sheet, #note-detail-view, #moment-detail-view) { isolation: isolate; }
+#mobile-app .browser-scroll-blur {
+ position: fixed; pointer-events: none; z-index: 2;
+ background: var(--paper);
+ backdrop-filter: blur(16px) !important; -webkit-backdrop-filter: blur(16px) !important;
+ mask-image: linear-gradient(var(--edge-direction), #000, #000 15%, transparent);
+ -webkit-mask-image: linear-gradient(var(--edge-direction), #000, #000 15%, transparent);
+ opacity: var(--edge-strength); border: 0; box-shadow: none;
+}
+#mobile-app .browser-scroll-blur > span { display: none !important; }
+#mobile-app .browser-scroll-blur.dock-edge {
+ background: var(--paper);
+ mask-image: linear-gradient(to bottom, transparent, #000 var(--paper-end), #000);
+ -webkit-mask-image: linear-gradient(to bottom, transparent, #000 var(--paper-end), #000);
+}
+#mobile-app .mobile-sheet :is(.sheet-heading, .sheet-ending) { position: relative; z-index: 3; }
+
+/* The profile hero stays above the independently scrolling settings. */
+#page-profile .profile-scroll-content { width: calc(100% + 36px); }
+#page-profile .profile-fixed-top { margin: 0 -18px; padding: calc(env(safe-area-inset-top) + 12px) 18px 8px; }
+#page-profile .profile-peek-art { height: clamp(150px, 46vw, 240px); margin: 0 -18px 0; overflow: visible; }
+#page-profile .profile-peek-art img { transform: translateY(calc(-1 * min(16px, calc(env(safe-area-inset-top) + 10px)))); }
+#page-profile .profile-hero { margin-top: -12px; padding: 14px 16px; border-radius: 22px; }
+#page-profile .profile-hero small { font-size: 13px; line-height: 1.6; }
+#page-profile .settings-title { margin: 22px 6px 10px; font-size: 16px; }
+#page-profile .settings-group { margin-top: 0; }
+#page-profile :is(.setting-button, .setting-row) { min-height: 56px; padding: 10px 12px; }
+#page-profile :is(.setting-button, .setting-row) b { font-size: 15px; line-height: 1.4; }
+#page-profile :is(.setting-button, .setting-row) small { font-size: 12px; line-height: 1.5; margin-top: 3px; }
+#mobile-app :is(.app-confirm [data-confirm-accept], .image-cropper [data-crop=confirm], .daily-answer-actions .wide-primary, .reminder-style-actions .wide-primary, .reminder-system-help [data-dismiss]) { --glass-base: #efb4c2; }
+
+#mobile-app .mobile-dock { padding-top: 5px; padding-bottom: 5px; align-items: center; }
+#mobile-app .mobile-dock button { padding: 0; }
+
+/* Secondary screens have a title, without an extra introduction above content. */
+#mobile-app .mobile-sheet .sheet-heading :is(p, small),
+#mobile-app .mobile-sheet .reminder-intro:not(#reminder-style-for) { display: none; }
+#mobile-app #reminder-settings-panel .reminder-list-group { padding: 10px 12px; margin: 0 0 10px; }
+#mobile-app #reminder-settings-panel .reminder-list-group h3 { margin: 0 0 6px; font-size: 14px; line-height: 1.4; }
+#mobile-app #reminder-settings-panel .reminder-management-row { padding: 4px 0; gap: 8px; }
+#mobile-app #reminder-settings-panel .reminder-management-row .setting-button {
+ min-height: 0; height: auto; padding: 0; margin: 0; box-shadow: none; background: transparent !important;
+ backdrop-filter: none; -webkit-backdrop-filter: none; border: 0;
+}
+#mobile-app #reminder-settings-panel .reminder-management-row b { font-size: 15px; line-height: 1.4; }
+#mobile-app #reminder-settings-panel .reminder-management-row small { font-size: 13px; margin-top: 3px; line-height: 1.35; }
+#mobile-app #reminder-settings-panel .reminder-time-edit { --glass-base: #f7d6df; border-color: #efd2dc; padding: 8px 10px; font-size: 13px; }
+#mobile-app .stepper { gap: 8px; flex-shrink: 0; }
+#mobile-app .stepper button { --glass-base: #f7d6df; width: 36px; height: 36px; padding: 0; display: grid; place-items: center; font-size: 25px; line-height: 1; border-radius: 12px; }
+#mobile-app .stepper output { min-width: 48px; font-size: 18px; font-weight: 600; line-height: 1.2; }
+#mobile-app .weather-rule-list { display: grid; gap: 0; border: 1px solid #efe2d8; border-radius: 14px; overflow: hidden; margin: 10px 0 14px; }
+#mobile-app .weather-rule-list label { display: flex; align-items: center; justify-content: space-between; min-height: 42px; padding: 0 12px; font-size: 15px; background: #fffdf8; }
+#mobile-app .weather-rule-list label + label { border-top: 1px solid #f1e5df; }
+#mobile-app .weather-rule-list input { width: 18px; height: 18px; accent-color: #d997a6; }
+#mobile-app .weather-time-heading { display: flex; justify-content: space-between; align-items: center; font-size: 15px; }
+#mobile-app .weather-time-heading button, #mobile-app .weather-time-remove { --glass-base: #f7d6df; background: #f7d6df; border: 0; border-radius: 10px; padding: 7px 10px; color: #74575e; font: inherit; }
+#mobile-app .weather-times { display: grid; gap: 8px; margin: 10px 0; }
+#mobile-app .weather-time-row { display: flex; align-items: center; gap: 10px; }
+#mobile-app .weather-time-row input { flex: 1; min-width: 0; height: 40px; padding: 0 12px; border: 1px solid #ead6dc; font-size: 16px; }
+#mobile-app .weather-footnote { font-size: 12px; line-height: 1.5; margin: 12px 0 0; color: #a58a84; }
+
+#mobile-app .menu-row.size-row { --glass-base: #fceaf0; padding: 12px; min-height: 62px; }
+#mobile-app #reminder-settings-panel .reminder-list-group h3 { font-size: 13px; margin-bottom: 4px; }
+#mobile-app #reminder-settings-panel .reminder-management-row small.reminder-entry-time { font-size: 12px; }
+
+/* All pages fill the same shell beneath the overlay dock. The room, composer
+   and last scrolling card reserve the same slot instead of two grid layouts. */
+#mobile-app #page-home { box-sizing: border-box; padding-bottom: calc(var(--dock-slot) + var(--content-end-gap)); }
+#mobile-app #page-home .mobile-room { margin-bottom: 0; }
+#mobile-app #page-chat.content-page { box-sizing: border-box; padding-bottom: calc(var(--dock-slot) + var(--content-end-gap)); }
+#mobile-app #page-chat .page-chat-form { padding-bottom: 0; }
+#mobile-app.keyboard-open #page-chat.content-page { padding-bottom: var(--content-end-gap); }
+#mobile-app .ledger-page { position: absolute; inset: 0; z-index: 30; padding-top: env(safe-area-inset-top); background: #fff9ef; }
+#mobile-app .ledger-page .sheet-body { height: 100%; max-height: none; overflow: hidden; padding: 0; margin: 0; }
+#mobile-app.ledger-open .mobile-dock { display: none !important; }
+#mobile-app .ledger-page iframe { display: block; width: 100%; height: 100%; border: 0; }
+#mobile-app #memo-companion-books .sheet-body { display: grid; grid-template-columns: 1fr; gap: 10px; }
+#mobile-app #memo-companion-books .setting-button { display: flex; width: 100%; min-height: 68px; margin: 0; padding: 12px 14px; align-items: center; border: 1px solid #efdfd0; border-radius: 14px; --glass-base: #fff9ed; }
+#mobile-app #memo-companion-books .setting-button span { flex: 1; }
+#mobile-app #memo-companion-books .setting-button b { font-size: 16px; line-height: 1.4; }
+#mobile-app #memo-companion-books .setting-button small { display: block; font-size: 13px; line-height: 1.5; margin-top: 3px; }
+#page-memo #memo-open-ledger { --glass-base: #fbe7ed; background: #fbe7ed; border-color: #efd8e0; }
+#live-style-panel .live-preview-label { display: block; margin: 0 0 8px; font-size: 12px; color: #9b7c81; }
+#live-style-panel .live-style-preview { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 16px; background: color-mix(in srgb, var(--live-background) 70%, transparent); backdrop-filter: blur(12px); }
+#live-style-panel .live-style-preview > img { width: 84px; height: 108px; object-fit: contain; flex: 0 0 84px; }
+#live-style-panel .live-style-preview.is-island { background: #000 !important; }
+#live-style-panel .live-preview-copy { flex: 1; min-width: 0; }
+#live-style-panel .live-preview-copy > p { margin: 0 0 8px; padding: 8px 10px; min-height: 44px; display: grid; place-items: center; font-size: 13px; line-height: 1.45; text-align: center; border-radius: 14px 14px 14px 2px; background: color-mix(in srgb, var(--live-bubble) 78%, transparent); color: var(--live-bubble-ink); border: .6px solid #ffffff77; }
+#live-style-panel .live-preview-actions { display: flex; gap: 6px; }
+#live-style-panel .live-preview-actions > span { flex: 1; text-align: center; padding: 8px 0; min-height: 34px; font-size: 11px; line-height: 16px; border-radius: 14px; background: color-mix(in srgb, var(--live-buttons) 78%, transparent); color: var(--live-button-ink); border: .6px solid #ffffff66; }
+#live-style-panel .live-color-row { display: flex; align-items: center; justify-content: space-between; padding: 9px 2px; min-height: 46px; border-bottom: 1px solid #f1e4df; font-size: 14px; }
+#mobile-app #live-style-panel .live-color-row input { width: 48px; height: 32px; padding: 2px; border-radius: 10px; border: 1px solid #ead3dd; background: #fffdf8; }
+#live-style-panel .live-style-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+#mobile-app #page-profile .stepper { gap: 6px; }
+#mobile-app #page-profile .stepper button { width: 30px; height: 30px; min-height: 30px; font-size: 21px; }
+#mobile-app #page-profile .stepper output { min-width: 40px; font-size: 16px; font-weight: 500; }
+
+#page-memo .memo-empty-compact .empty-heart { display: block; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; transform: translateY(.5px); }
+
+#mobile-app #weather-settings-panel #weather-times { margin-bottom:12px; }
+#mobile-app #weather-settings-panel #weather-refresh { margin-top:0; }
+#mobile-app :is(.note-detail-header, .note-detail-footer) { position:relative; z-index:3; }
+#mobile-app #routine-reminder-panel, #mobile-app #reminder-style-panel { z-index:45; }
+#mobile-app:has(:is(#routine-reminder-panel,#reminder-style-panel):not([hidden])) .sheet-backdrop { z-index:44; }
+#routine-reminder-panel .routine-time-group { margin:16px 0; }
+#routine-reminder-panel .routine-time-group h3 { font-size:14px; margin:0; font-weight:500; }
+#routine-reminder-panel .routine-copy { font-size:12px; line-height:1.65; color:#a48784; margin:10px 0 18px; }
+#routine-reminder-panel .weather-time-row { gap:10px; margin-top:10px; }
+#routine-reminder-panel .weather-time-row input { flex:1; min-width:0; }
+#routine-reminder-panel .reminder-inline-card { margin:16px 0; }
+#mobile-app #reminder-style-panel .reminder-intro { margin:0 0 14px; font-size:13px; }
+#mobile-app #reminder-style-panel .reminder-mode-card { padding:0; border:0; background:transparent; box-shadow:none; display:grid; gap:14px; }
+#mobile-app #reminder-style-panel .switch-row { margin:0; padding:14px; border:1px solid #f1e0e5; border-radius:16px; background:rgb(255 249 250 /78%); }
+#mobile-app #reminder-style-panel .reminder-choice { margin:0; padding:0 2px; display:grid; gap:12px; }
+#mobile-app #reminder-style-panel .field-label { margin:0; font-size:13px; line-height:1.4; }
+#mobile-app #reminder-style-panel .field-label select { margin-top:6px; }
+#mobile-app #reminder-style-panel .reminder-style-actions { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin-top:18px; }
+#mobile-app #reminder-style-panel .reminder-style-actions > button { height:42px; min-height:42px; width:100%; margin:0; padding:0 8px; font-size:14px!important; font-weight:500!important; line-height:1; border-radius:999px; --glass-base:#fceaf0; }
+#mobile-app #reminder-style-panel #reminder-preview { --glass-base:#fff4f7; background:rgb(255 244 247 /90%)!important; }
+#mobile-app :is(input,select,textarea,[contenteditable="true"]):focus { outline:none!important; outline-offset:0!important; border-color:#c798a8!important; box-shadow:inset 0 0 0 1px #c798a8!important; }
+#mobile-app button:focus-visible { outline:none!important; outline-offset:0!important; box-shadow:inset 0 0 0 2px #c798a8!important; }
+
+
+#mobile-app :is(a,[role="button"],.memo-actionable-item):focus-visible { outline:none!important; outline-offset:0!important; box-shadow:inset 0 0 0 2px #c798a8!important; }
+.chat-selecting .chat-line.selected .chat-message { outline:none; box-shadow:inset 0 0 0 2px rgb(233 163 177 /45%); }
+

@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-generate-local-reply"
+description = "Enables the generate_local_reply command without any pre-configured scope."
+commands.allow = ["generate_local_reply"]
+
+[[permission]]
+identifier = "deny-generate-local-reply"
+description = "Denies the generate_local_reply command without any pre-configured scope."
+commands.deny = ["generate_local_reply"]

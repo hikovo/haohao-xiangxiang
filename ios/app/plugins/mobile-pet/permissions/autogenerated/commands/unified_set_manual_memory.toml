@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-unified-set-manual-memory"
+description = "Enables the unified_set_manual_memory command without any pre-configured scope."
+commands.allow = ["unified_set_manual_memory"]
+
+[[permission]]
+identifier = "deny-unified-set-manual-memory"
+description = "Denies the unified_set_manual_memory command without any pre-configured scope."
+commands.deny = ["unified_set_manual_memory"]

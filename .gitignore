@@ -1,0 +1,14 @@
+node_modules/
+dist/
+target/
+build/
+.DS_Store
+.env
+.env.*
+*.ipa
+*.xcarchive/
+*.p12
+*.mobileprovision
+*.gguf
+*.aar
+ios/app/src-tauri/gen/

@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-speak-weather"
+description = "Enables the speak_weather command without any pre-configured scope."
+commands.allow = ["speak_weather"]
+
+[[permission]]
+identifier = "deny-speak-weather"
+description = "Denies the speak_weather command without any pre-configured scope."
+commands.deny = ["speak_weather"]

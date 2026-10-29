@@ -1,0 +1,678 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PermissionFile",
+  "description": "Permission file that can define a default permission, a set of permissions or a list of inlined permissions.",
+  "type": "object",
+  "properties": {
+    "default": {
+      "description": "The default permission set for the plugin",
+      "anyOf": [
+        {
+          "$ref": "#/definitions/DefaultPermission"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "set": {
+      "description": "A list of permissions sets defined",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/PermissionSet"
+      }
+    },
+    "permission": {
+      "description": "A list of inlined permissions",
+      "default": [],
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Permission"
+      }
+    }
+  },
+  "definitions": {
+    "DefaultPermission": {
+      "description": "The default permission set of the plugin.\n\nWorks similarly to a permission with the \"default\" identifier.",
+      "type": "object",
+      "required": [
+        "permissions"
+      ],
+      "properties": {
+        "version": {
+          "description": "The version of the permission.",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint64",
+          "minimum": 1.0
+        },
+        "description": {
+          "description": "Human-readable description of what the permission does. Tauri convention is to use `<h4>` headings in markdown content for Tauri documentation generation purposes.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "permissions": {
+          "description": "All permissions this set contains.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PermissionSet": {
+      "description": "A set of direct permissions grouped together under a new name.",
+      "type": "object",
+      "required": [
+        "description",
+        "identifier",
+        "permissions"
+      ],
+      "properties": {
+        "identifier": {
+          "description": "A unique identifier for the permission.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Human-readable description of what the permission does.",
+          "type": "string"
+        },
+        "permissions": {
+          "description": "All permissions this set contains.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PermissionKind"
+          }
+        }
+      }
+    },
+    "Permission": {
+      "description": "Descriptions of explicit privileges of commands.\n\nIt can enable commands to be accessible in the frontend of the application.\n\nIf the scope is defined it can be used to fine grain control the access of individual or multiple commands.",
+      "type": "object",
+      "required": [
+        "identifier"
+      ],
+      "properties": {
+        "version": {
+          "description": "The version of the permission.",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint64",
+          "minimum": 1.0
+        },
+        "identifier": {
+          "description": "A unique identifier for the permission.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Human-readable description of what the permission does. Tauri internal convention is to use `<h4>` headings in markdown content for Tauri documentation generation purposes.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "commands": {
+          "description": "Allowed or denied commands when using this permission.",
+          "default": {
+            "allow": [],
+            "deny": []
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/Commands"
+            }
+          ]
+        },
+        "scope": {
+          "description": "Allowed or denied scoped when using this permission.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Scopes"
+            }
+          ]
+        },
+        "platforms": {
+          "description": "Target platforms this permission applies. By default all platforms are affected by this permission.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/Target"
+          }
+        }
+      }
+    },
+    "Commands": {
+      "description": "Allowed and denied commands inside a permission.\n\nIf two commands clash inside of `allow` and `deny`, it should be denied by default.",
+      "type": "object",
+      "properties": {
+        "allow": {
+          "description": "Allowed command.",
+          "default": [],
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "deny": {
+          "description": "Denied command, which takes priority.",
+          "default": [],
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Scopes": {
+      "description": "An argument for fine grained behavior control of Tauri commands.\n\nIt can be of any serde serializable type and is used to allow or prevent certain actions inside a Tauri command. The configured scope is passed to the command and will be enforced by the command implementation.\n\n## Example\n\n```json { \"allow\": [{ \"path\": \"$HOME/**\" }], \"deny\": [{ \"path\": \"$HOME/secret.txt\" }] } ```",
+      "type": "object",
+      "properties": {
+        "allow": {
+          "description": "Data that defines what is allowed by the scope.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/Value"
+          }
+        },
+        "deny": {
+          "description": "Data that defines what is denied by the scope. This should be prioritized by validation logic.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/Value"
+          }
+        }
+      }
+    },
+    "Value": {
+      "description": "All supported ACL values.",
+      "anyOf": [
+        {
+          "description": "Represents a null JSON value.",
+          "type": "null"
+        },
+        {
+          "description": "Represents a [`bool`].",
+          "type": "boolean"
+        },
+        {
+          "description": "Represents a valid ACL [`Number`].",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Number"
+            }
+          ]
+        },
+        {
+          "description": "Represents a [`String`].",
+          "type": "string"
+        },
+        {
+          "description": "Represents a list of other [`Value`]s.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Value"
+          }
+        },
+        {
+          "description": "Represents a map of [`String`] keys to [`Value`]s.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Value"
+          }
+        }
+      ]
+    },
+    "Number": {
+      "description": "A valid ACL number.",
+      "anyOf": [
+        {
+          "description": "Represents an [`i64`].",
+          "type": "integer",
+          "format": "int64"
+        },
+        {
+          "description": "Represents a [`f64`].",
+          "type": "number",
+          "format": "double"
+        }
+      ]
+    },
+    "Target": {
+      "description": "Platform target.",
+      "oneOf": [
+        {
+          "description": "MacOS.",
+          "type": "string",
+          "enum": [
+            "macOS"
+          ]
+        },
+        {
+          "description": "Windows.",
+          "type": "string",
+          "enum": [
+            "windows"
+          ]
+        },
+        {
+          "description": "Linux.",
+          "type": "string",
+          "enum": [
+            "linux"
+          ]
+        },
+        {
+          "description": "Android.",
+          "type": "string",
+          "enum": [
+            "android"
+          ]
+        },
+        {
+          "description": "iOS.",
+          "type": "string",
+          "enum": [
+            "iOS"
+          ]
+        }
+      ]
+    },
+    "PermissionKind": {
+      "type": "string",
+      "oneOf": [
+        {
+          "description": "Enables the answer_daily_reminder command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-answer-daily-reminder",
+          "markdownDescription": "Enables the answer_daily_reminder command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the answer_daily_reminder command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-answer-daily-reminder",
+          "markdownDescription": "Denies the answer_daily_reminder command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the cancel_focus_reminder command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-cancel-focus-reminder",
+          "markdownDescription": "Enables the cancel_focus_reminder command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the cancel_focus_reminder command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-cancel-focus-reminder",
+          "markdownDescription": "Denies the cancel_focus_reminder command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the copy_text command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-copy-text",
+          "markdownDescription": "Enables the copy_text command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the copy_text command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-copy-text",
+          "markdownDescription": "Denies the copy_text command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the daily_reminder_state command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-daily-reminder-state",
+          "markdownDescription": "Enables the daily_reminder_state command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the daily_reminder_state command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-daily-reminder-state",
+          "markdownDescription": "Denies the daily_reminder_state command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the delete_local_model command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-delete-local-model",
+          "markdownDescription": "Enables the delete_local_model command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the delete_local_model command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-delete-local-model",
+          "markdownDescription": "Denies the delete_local_model command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the download_local_model command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-download-local-model",
+          "markdownDescription": "Enables the download_local_model command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the download_local_model command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-download-local-model",
+          "markdownDescription": "Denies the download_local_model command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the generate_local_reply command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-generate-local-reply",
+          "markdownDescription": "Enables the generate_local_reply command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the generate_local_reply command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-generate-local-reply",
+          "markdownDescription": "Denies the generate_local_reply command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the haptic_tap command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-haptic-tap",
+          "markdownDescription": "Enables the haptic_tap command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the haptic_tap command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-haptic-tap",
+          "markdownDescription": "Denies the haptic_tap command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the health_store command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-health-store",
+          "markdownDescription": "Enables the health_store command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the health_store command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-health-store",
+          "markdownDescription": "Denies the health_store command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the ledger_store command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-ledger-store",
+          "markdownDescription": "Enables the ledger_store command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the ledger_store command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-ledger-store",
+          "markdownDescription": "Denies the ledger_store command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the local_model command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-local-model",
+          "markdownDescription": "Enables the local_model command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the local_model command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-local-model",
+          "markdownDescription": "Denies the local_model command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the local_model_status command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-local-model-status",
+          "markdownDescription": "Enables the local_model_status command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the local_model_status command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-local-model-status",
+          "markdownDescription": "Denies the local_model_status command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the mark_daily_prompt_shown command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-mark-daily-prompt-shown",
+          "markdownDescription": "Enables the mark_daily_prompt_shown command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the mark_daily_prompt_shown command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-mark-daily-prompt-shown",
+          "markdownDescription": "Denies the mark_daily_prompt_shown command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the open_external command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-open-external",
+          "markdownDescription": "Enables the open_external command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the open_external command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-open-external",
+          "markdownDescription": "Denies the open_external command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the overlay_status command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-overlay-status",
+          "markdownDescription": "Enables the overlay_status command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the overlay_status command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-overlay-status",
+          "markdownDescription": "Denies the overlay_status command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the reminder_style command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-reminder-style",
+          "markdownDescription": "Enables the reminder_style command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the reminder_style command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-reminder-style",
+          "markdownDescription": "Denies the reminder_style command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the save_daily_reminder command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-save-daily-reminder",
+          "markdownDescription": "Enables the save_daily_reminder command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the save_daily_reminder command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-save-daily-reminder",
+          "markdownDescription": "Denies the save_daily_reminder command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the schedule_focus_reminder command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-schedule-focus-reminder",
+          "markdownDescription": "Enables the schedule_focus_reminder command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the schedule_focus_reminder command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-schedule-focus-reminder",
+          "markdownDescription": "Denies the schedule_focus_reminder command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the speak_weather command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-speak-weather",
+          "markdownDescription": "Enables the speak_weather command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the speak_weather command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-speak-weather",
+          "markdownDescription": "Denies the speak_weather command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the start_overlay command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-start-overlay",
+          "markdownDescription": "Enables the start_overlay command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the start_overlay command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-start-overlay",
+          "markdownDescription": "Denies the start_overlay command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the stop_overlay command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-stop-overlay",
+          "markdownDescription": "Enables the stop_overlay command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the stop_overlay command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-stop-overlay",
+          "markdownDescription": "Denies the stop_overlay command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the sync_memo_reminders command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-sync-memo-reminders",
+          "markdownDescription": "Enables the sync_memo_reminders command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the sync_memo_reminders command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-sync-memo-reminders",
+          "markdownDescription": "Denies the sync_memo_reminders command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the sync_widgets command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-sync-widgets",
+          "markdownDescription": "Enables the sync_widgets command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the sync_widgets command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-sync-widgets",
+          "markdownDescription": "Denies the sync_widgets command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the timetable_scan command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-timetable-scan",
+          "markdownDescription": "Enables the timetable_scan command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the timetable_scan command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-timetable-scan",
+          "markdownDescription": "Denies the timetable_scan command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the timetable_store command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-timetable-store",
+          "markdownDescription": "Enables the timetable_store command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the timetable_store command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-timetable-store",
+          "markdownDescription": "Denies the timetable_store command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the unified_chat command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-unified-chat",
+          "markdownDescription": "Enables the unified_chat command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the unified_chat command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-unified-chat",
+          "markdownDescription": "Denies the unified_chat command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the unified_clear_conversation command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-unified-clear-conversation",
+          "markdownDescription": "Enables the unified_clear_conversation command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the unified_clear_conversation command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-unified-clear-conversation",
+          "markdownDescription": "Denies the unified_clear_conversation command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the unified_import_legacy command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-unified-import-legacy",
+          "markdownDescription": "Enables the unified_import_legacy command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the unified_import_legacy command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-unified-import-legacy",
+          "markdownDescription": "Denies the unified_import_legacy command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the unified_memory_state command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-unified-memory-state",
+          "markdownDescription": "Enables the unified_memory_state command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the unified_memory_state command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-unified-memory-state",
+          "markdownDescription": "Denies the unified_memory_state command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the unified_retract_messages command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-unified-retract-messages",
+          "markdownDescription": "Enables the unified_retract_messages command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the unified_retract_messages command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-unified-retract-messages",
+          "markdownDescription": "Denies the unified_retract_messages command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the unified_set_manual_memory command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-unified-set-manual-memory",
+          "markdownDescription": "Enables the unified_set_manual_memory command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the unified_set_manual_memory command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-unified-set-manual-memory",
+          "markdownDescription": "Denies the unified_set_manual_memory command without any pre-configured scope."
+        },
+        {
+          "description": "Default permissions for the plugin\n#### This default permission set includes:\n\n- `allow-sync-widgets`\n- `allow-speak-weather`\n- `allow-local-model`\n- `allow-ledger-store`\n- `allow-health-store`\n- `allow-timetable-store`\n- `allow-timetable-scan`\n- `allow-open-external`\n- `allow-copy-text`\n- `allow-haptic-tap`\n- `allow-start-overlay`\n- `allow-stop-overlay`\n- `allow-overlay-status`\n- `allow-daily-reminder-state`\n- `allow-save-daily-reminder`\n- `allow-mark-daily-prompt-shown`\n- `allow-answer-daily-reminder`\n- `allow-sync-memo-reminders`\n- `allow-reminder-style`\n- `allow-schedule-focus-reminder`\n- `allow-cancel-focus-reminder`\n- `allow-unified-chat`\n- `allow-unified-retract-messages`\n- `allow-unified-clear-conversation`\n- `allow-unified-memory-state`\n- `allow-unified-import-legacy`",
+          "type": "string",
+          "const": "default",
+          "markdownDescription": "Default permissions for the plugin\n#### This default permission set includes:\n\n- `allow-sync-widgets`\n- `allow-speak-weather`\n- `allow-local-model`\n- `allow-ledger-store`\n- `allow-health-store`\n- `allow-timetable-store`\n- `allow-timetable-scan`\n- `allow-open-external`\n- `allow-copy-text`\n- `allow-haptic-tap`\n- `allow-start-overlay`\n- `allow-stop-overlay`\n- `allow-overlay-status`\n- `allow-daily-reminder-state`\n- `allow-save-daily-reminder`\n- `allow-mark-daily-prompt-shown`\n- `allow-answer-daily-reminder`\n- `allow-sync-memo-reminders`\n- `allow-reminder-style`\n- `allow-schedule-focus-reminder`\n- `allow-cancel-focus-reminder`\n- `allow-unified-chat`\n- `allow-unified-retract-messages`\n- `allow-unified-clear-conversation`\n- `allow-unified-memory-state`\n- `allow-unified-import-legacy`"
+        }
+      ]
+    }
+  }
+}

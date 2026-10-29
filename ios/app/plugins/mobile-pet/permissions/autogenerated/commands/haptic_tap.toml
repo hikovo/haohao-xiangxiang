@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-haptic-tap"
+description = "Enables the haptic_tap command without any pre-configured scope."
+commands.allow = ["haptic_tap"]
+
+[[permission]]
+identifier = "deny-haptic-tap"
+description = "Denies the haptic_tap command without any pre-configured scope."
+commands.deny = ["haptic_tap"]
