@@ -1,0 +1,37 @@
+name: 苹果持续揉面中
+run-name: 苹果持续揉面中
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    name: 苹果持续揉面中
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: 苹果持续揉面中
+        uses: actions/checkout@v6
+      - name: 苹果持续揉面中
+        uses: actions/configure-pages@v5
+      - name: 苹果持续揉面中
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: docs
+      - name: 苹果持续揉面中
+        id: deployment
+        uses: actions/deploy-pages@v4
